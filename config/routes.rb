@@ -15,5 +15,4 @@ Rails.application.routes.draw do
 
   resources :tasks, only: [:update]
 
-  resources :objectives, only: [:destroy]
 end
