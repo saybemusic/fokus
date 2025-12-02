@@ -1,59 +1,60 @@
 class ObjectivesController < ApplicationController
   before_action :set_objective, only: [:show, :update, :destroy]
 
-    SYSTEM_PROMPT = "You are an expert planner specializing in pedagogy and learning program design.
+SYSTEM_PROMPT = <<~PROMPT
+  You are an expert planner specializing in pedagogy and learning program design.
 
-    Your mission: create a structured learning program based on the user's information.
+  Your mission: create a structured learning program based on the user's information.
 
-    User inputs:
-    - Goal: {{objectif}}
-    - Program duration in days: {{duree_programme}}
-    - Daily available time in minutes: {{temps_quotidien}}
+  User inputs:
+  - Goal: {{objectif}}
+  - Program duration in days: {{duree_programme}}
+  - Daily available time in minutes: {{temps_quotidien}}
 
-    Constraints:
-    # 1. Each "todo" represents one day of the program.
-    2. Each "task" is a concrete action to be completed on that day.
-    3. Respect the daily maximum time constraint.
-    4. The program must be progressive and pedagogical.
-    5. Provide clear titles and descriptions for each todo.
-    6. Each task may include a link or AI resource in "ressource_ia" if available.
-    7. Assign a "priority" (integer) to each task to define execution order.
-    8. The JSON output must be strictly valid (double quotes, no trailing commas).
+  Constraints:
+  1. Each "todo" represents one day of the program.
+  2. Each "task" is a concrete action to be completed on that day.
+  3. Respect the daily maximum time constraint.
+  4. The program must be progressive and pedagogical.
+  5. Provide clear titles and descriptions for each todo.
+  6. Each task may include a link or AI resource in "ressource_ia" if available.
+  7. Assign a "priority" (integer) to each task to define execution order.
+  8. The JSON output must be strictly valid (double quotes, no trailing commas).
 
-    MANDATORY output format:
+  MANDATORY output format:
 
-    {
-      "todos": [
-        {
-          "day": 1,
-          "title": "Todo title",
-          "description": "Description of the day",
-          "tasks": [
-            {
-              "description": "Task name",
-              "ressource_ia": "Link or AI resource if available",
-              "priority": 1
-            }
-          ]
-        }
-      ]
-    }
+  {
+    "todos": [
+      {
+        "day": 1,
+        "title": "Todo title",
+        "description": "Description of the day",
+        "tasks": [
+          {
+            "description": "Task name",
+            "ressource_ia": "Link or AI resource if available",
+            "priority": 1
+          }
+        ]
+      }
+    ]
+  }
 
-    Generate the complete program for the total number of requested days, with detailed todos and tasks.
-    Return **strictly the JSON only**, with no explanations or additional text."
+  Generate the complete program for the total number of requested days, with detailed todos and tasks.
+  Return strictly the JSON only, with no explanations or additional text.
+PROMPT
 
+def index
+  @objectives = current_user.objectives
+end
 
+def new
+  @objective = current_user.objectives.new
+end
 
-  def index
-    @objectives = current_user.objectives
-  end
-
-  def show
-  end
-
-  def new
-    @objective = current_user.objectives.new
-  end
+def show
+  @objective = Objective.find(params[:id])
+end
 
   def create
     @objective = current_user.objectives.new(objective_params)

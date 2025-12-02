@@ -1,1 +1,53 @@
-<h1>Objectives</h1>
+<h1>Mes objectifs</h1>
+
+<%= link_to "Créer un nouvel objectif", objectives_path, class: "btn btn-primary" %>
+<h1>Créer un objectif et tester le LLM</h1>
+
+<%= form_with(model: @objective, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :goal, "Objectif" %><br>
+    <%= form.text_field :goal, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time_due, "Durée du programme (jours)" %><br>
+    <%= form.number_field :time_due, min: 1, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :time_global, "Temps quotidien disponible (minutes)" %><br>
+    <%= form.number_field :time_global, min: 1, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :resume, "Résumé / Notes (optionnel)" %><br>
+    <%= form.text_area :resume %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Générer le programme" %>
+  </div>
+<% end %>
+
+
+
+<hr>
+
+<% if @objectives.any? %>
+  <ul>
+    <% @objectives.each do |objective| %>
+      <li>
+        <strong><%= objective.goal %></strong><br>
+        <%= objective.resume %><br>
+        <small>Temps quotidien : <%= objective.time_global %> min</small><br>
+        <small>Durée du programme : <%= objective.time_due %> jours</small><br>
+
+        <%= link_to "Voir", objective_path(objective) %> |
+        <%= link_to "Éditer", edit_objective_path(objective) %> |
+        <%= link_to "Supprimer", objective_path(objective), method: :delete, data: { confirm: "Supprimer ?" } %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Aucun objectif pour le moment.</p>
+<% end %>
