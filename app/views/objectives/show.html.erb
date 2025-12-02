@@ -11,11 +11,12 @@
   <div class="objective-details">
     <% if @objective.todos.any? %>
       <% @objective.todos.order(:due_date).each do |todo| %>
-        <div class="card mb-3">
-          <div class="card-header">
+        <div class="carte mb-3">
+          <div class="carte-header">
             Jour <%= todo.to_ordered_day() %> : <%= todo.title %>
           </div>
-          <div class="card-body">
+          <hr>
+          <div class="carte-body">
             <p><%= todo.description %></p>
           </div>
         </div>
