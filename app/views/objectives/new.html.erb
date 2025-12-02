@@ -1,23 +1,21 @@
-<h1>Création d'un programme</h1>
-<%= form_with(model: @objective, local: true) do |form| %>
-  <div class="field">
-    <%= form.label :goal, "Objectif" %><br>
-    <%= form.text_field :goal, required: true %>
-  </div>
-  <div class="field">
-    <%= form.label :time_due, "Durée du programme (jours)" %><br>
-    <%= form.number_field :time_due, min: 1, required: true %>
-  </div>
-  <div class="field">
-    <%= form.label :time_global, "Temps quotidien disponible (minutes)" %><br>
-    <%= form.number_field :time_global, min: 1, required: true %>
-  </div>
-  <div class="field">
-    <%= form.label :resume, "Résumé / Notes (optionnel)" %><br>
-    <%= form.text_area :resume %>
-  </div>
-  <div class="actions">
-    <%= form.submit "Générer le programme", class: "btn btn-success mt-2" %>
-  </div>
-<% end %>
-<hr>
+<div class="form-container">
+  <%= simple_form_for @objective do |f| %>
+    <%= f.input :goal, label: "Objectif", required: true %>
+
+    <%= f.input :time_due,
+                label: "Durée du programme (jours)",
+                as: :integer,
+                input_html: { min: 1, required: true } %>
+
+    <%= f.input :time_global,
+                label: "Temps quotidien disponible (minutes)",
+                as: :integer,
+                input_html: { min: 1, required: true } %>
+
+    <%= f.input :resume,
+                label: "Résumé / Notes (optionnel)",
+                as: :text %>
+
+    <%= f.button :submit, "Générer le programme", class: "btn" %>
+  <% end %>
+</div>
