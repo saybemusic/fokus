@@ -1,55 +1,62 @@
-// Assurer que le container prend toute la hauteur
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
+.fk-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.fk-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130%;
+  background-image: asset-url("backgroundForm.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  animation: fokusMove 5s ease-in-out infinite alternate;
+  z-index: 0;
+  will-change: transform;
+}
+
+// Animation du background
 @keyframes fokusMove {
-  0%   { transform: translateY(0); }
+  0% { transform: translateY(0); }
   100% { transform: translateY(-50px); }
 }
 
 .fk-container {
   position: relative;
-  height: 100%;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  overflow: hidden;
+  align-items: center;
+  padding: 30px 16px;
+  box-sizing: border-box;
+  min-height: 100vh;
 
   > * {
     position: relative;
     z-index: 1;
   }
 
-  .fk-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 130%; // plus grand que le container
-    background-image: asset-url("backgroundForm.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 0;
-    will-change: transform;
-    animation: fokusMove 10s ease-in-out infinite alternate;
-  }
-
+  // HEADER
   .fk-header {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin: 30px 0;
+    text-align: center;
 
     .fk-title {
       margin: 0;
       font-size: 40px;
       color: #fff;
-      text-align: center;
 
       .fk-dot {
         color: #ff4fa5;
@@ -60,12 +67,13 @@ html, body {
       margin-top: 8px;
       font-size: 1rem;
       color: #eee;
-      text-align: center;
     }
   }
 
+  // FORM WRAPPER
   .fk-form-wrapper {
     width: 100%;
+    max-width: 400px;
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 20px;
@@ -81,7 +89,6 @@ html, body {
       color: #444;
       margin-bottom: 4px;
       display: block;
-
     }
 
     input,
@@ -117,10 +124,7 @@ html, body {
       border-radius: 6px;
       font-size: 16px;
       cursor: pointer;
-
-      &:hover {
-        background-color: #0056b3;
-      }
+      margin-top: 10px;
     }
   }
 }
