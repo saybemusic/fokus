@@ -1,3 +1,5 @@
+/* --- SIDEBAR --- */
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -11,6 +13,9 @@
   z-index: 5000;
 }
 
+.sidebar.open {
+  transform: translateX(0);
+}
 
 .sidebar a {
   color: #000;
@@ -20,11 +25,9 @@
   padding: 6px 0;
 }
 
-
 .sidebar a:hover {
   color: #555;
 }
-
 
 .sidebar ul li {
   display: flex;
@@ -32,19 +35,41 @@
   gap: 10px;
 }
 
-
-
-.sidebar.open {
-  transform: translateX(0);
+.sidebar ul {
+  padding: 16px;
+  margin: 0;
 }
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px 10px 0;
+}
+
+.profil {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #415D43;
+}
+
 
 .close-sidebar-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
   background: none;
   border: none;
+  cursor: pointer;
+  margin-left: auto;
 }
+
+
+
+
+.sidebar h3.dashboard-title {
+  margin-top: 35px;
+}
+
 
 .overlay {
   position: fixed;
