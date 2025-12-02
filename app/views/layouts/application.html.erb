@@ -10,9 +10,20 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
+<<body data-controller="sidebar">
 
+  <%= render "shared/navbar" %>
+  <%= render "shared/sidebar" %>
+
+  <!-- OVERLAY -->
+  <div class="overlay hidden"
+       data-sidebar-target="overlay"
+       data-action="click->sidebar#toggle"></div>
+
+  <!-- CONTENU -->
+  <div class="content-wrapper" data-sidebar-target="content">
     <%= yield %>
-  </body>
+  </div>
+
+</body>
 </html>
