@@ -1,0 +1,42 @@
+<!-- app/views/objectives/show.html.erb -->
+
+<h1>Objectif : <%= @objective.goal %></h1>
+<p><%= @objective.resume %></p>
+<p><strong>Durée totale :</strong> <%= @objective.time_due %> jours</p>
+<p><strong>Temps quotidien disponible :</strong> <%= @objective.time_global %> minutes</p>
+
+<hr>
+
+<h2>Programme détaillé</h2>
+
+<% if @objective.todos.any? %>
+  <% @objective.todos.order(:due_date).each do |todo| %>
+    <div class="card mb-3">
+      <div class="card-header">
+        Jour <%= todo.to_ordered_day() %> : <%= todo.title %>
+      </div>
+      <div class="card-body">
+        <p><%= todo.description %></p>
+
+        <% if todo.tasks.any? %>
+          <ul>
+            <% todo.tasks.order(:priority).each do |task| %>
+              <li>
+                <strong><%= task.title %></strong>
+                <% if task.ressource_ia.present? %>
+                  - <a href="<%= task.ressource_ia %>" target="_blank">Ressource IA</a>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>Aucune tâche pour ce jour.</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p>Aucun programme généré pour cet objectif.</p>
+<% end %>
+
+<%= link_to "Retour aux objectifs", objectives_path, class: "btn btn-secondary mt-3" %>
