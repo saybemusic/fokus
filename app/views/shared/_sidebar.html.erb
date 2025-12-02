@@ -31,7 +31,7 @@
       <% current_user.objectives.each do |objective| %>
         <li>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 ..."/></g></svg>
-          <%= link_to objective.goal, objective_path(objective) %>
+          <%= link_to objective.goal, new_objective_path(objective) %>
         </li>
       <% end %>
     <% else %>
