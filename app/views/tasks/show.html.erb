@@ -1,1 +1,24 @@
 <h1>Tasks show</h1>
+
+<% if todo.tasks.any? %>
+          <ul>
+            <% todo.tasks.order(:priority).each do |task| %>
+              <li>
+                <strong><%= task.title %></strong>
+                <% if task.ressource_ia.present? %>
+                  - <a href="<%= task.ressource_ia %>" target="_blank">Ressource IA</a>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>Aucune tâche pour ce jour.</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p>Aucun programme généré pour cet objectif.</p>
+<% end %>
+
+<%= link_to "Retour aux objectifs", objectives_path, class: "btn btn-secondary mt-3" %>
