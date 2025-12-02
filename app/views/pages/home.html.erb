@@ -1,30 +1,38 @@
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8 text-center">
+<div class="homepage">
+  <h1 class="hero-title">
+    Bienvenue<br>sur Fokus
+  </h1>
 
-      <!-- Titre principal -->
-  <div class="d-flex flex-column justify-content-center align-items-center" style="height: 50vh;">
-    <div class="animated-heading theme-light">
-      <h1 class="display-4 fw-bold mb-4">
-          <span>Bienvenue</span>
-          <span class="ms-2">sur</span>
-          <span class="ms-2">FOKUS</span>
-      </h1>
-    </div>
+  <p class="hero-subtitle">
+    Organise tes tâches, laisse l’IA créer la todo parfaite pour ta journée.
+  </p>
 
 
-      <p class="lead mb-4">
-        Vos motivations<br>
-        Généré par l'IA<br>
-      </p>
-
-      <% if user_signed_in? %>
-        <%= link_to "Objectifs", objectives_path %>
-        <% else %>
-        <%= link_to "Se connecter", new_user_session_path,  id: "theme-toggle", class: "theme-toggle" %>
-      <% end %>
-
-    </div>
+  <div class="feature-card">
+    <p class="feature-title">Todolist assistée par IA</p>
+    <p class="feature-text">
+      Dis ce que tu veux accomplir, Fokus génère une liste claire, priorisée et réalisable.
+    </p>
   </div>
-</div>
+
+  <div class="hero-center-text">
+    <% if user_signed_in? %>
+      <div class="fokus-slider"
+        data-controller="slidebutton"
+        data-slidebutton-target="slider">
+        <span class="fokus-slider-text" data-slidebutton-target="text">
+          Glisser pour commencer
+        </span>
+
+        <div class="fokus-slider-handle"
+            data-slidebutton-target="handle"
+            data-action="mousedown->slidebutton#startDrag touchstart->slidebutton#startDrag">
+          <span class="fokus-slider-arrow">›</span>
+        </div>
+      </div>
+      <% else %>
+      <%= link_to "Se connecter", new_user_session_path, class: "bouton mx-3" %>
+    <% end %>
+  </div>
+
 </div>
