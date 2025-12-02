@@ -1,19 +1,33 @@
-<div class="homepage">
-  <h1 class="hero-title">
-    Bienvenue<br>sur Fokus
-  </h1>
-
-  <p class="hero-subtitle">
-    Organise tes tâches, laisse l’IA créer la todo parfaite pour ta journée.
-  </p>
-
-
-  <div class="feature-card">
-    <p class="feature-title">Todolist assistée par IA</p>
-    <p class="feature-text">
-      Dis ce que tu veux accomplir, Fokus génère une liste claire, priorisée et réalisable.
+<div class="bg-blanc p-3">
+  <div class="hero" style="background-image: url('<%= image_path("backgroundHome.png") %>'); background-size: cover;">
+    <h1 class="hero-title">FOKUS VERS VOTRE OBJECTIF</h1>
+    <p class="hero-subtitle">
+      Définissez un objectif à atteindre, l'IA vous fais un plan d'action
     </p>
   </div>
+
+  <div class="feature-card shadow">
+    <p class="feature-title">Votre projet</p>
+    <p class="feature-text">
+      Décrivez votre idée en quelques mots, l'IA crée votre plan d'action personnalisé.
+    </p>
+  </div>
+
+  <div class="feature-card shadow">
+    <p class="feature-title">Passer à l'action</p>
+    <p class="feature-text">
+      Chaque jour, recevez votre To Do du jour pour avancer concrètement vers vos objectifs.
+    </p>
+  </div>
+
+  <div class="feature-card shadow">
+    <p class="feature-title">Suivi de progression</p>
+    <p class="feature-text">
+      Visualisez votre évolution et mesurez vos progrès en temps réel.
+    </p>
+  </div>
+
+
 
   <div class="hero-center-text">
     <% if user_signed_in? %>
@@ -31,7 +45,7 @@
         </div>
       </div>
       <% else %>
-      <%= link_to "Se connecter", new_objective_path, class: "bouton mx-3" %>
+      <%= link_to "Se connecter", new_user_session_path, class: "bouton mx-3" %>
     <% end %>
   </div>
 
