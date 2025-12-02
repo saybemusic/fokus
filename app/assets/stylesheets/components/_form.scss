@@ -1,0 +1,33 @@
+/* Centre le formulaire verticalement et horizontalement */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* prend toute la hauteur de la page */
+  background-color: #f5f5f5; /* couleur de fond douce */
+  padding: 20px;
+}
+
+/* Style du formulaire */
+.form-container form {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px; /* largeur maximale */
+}
+
+/* Style des boutons */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-container .btn:hover {
+  background-color: #45a049;
+}
