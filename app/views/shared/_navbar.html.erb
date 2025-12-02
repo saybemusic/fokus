@@ -2,21 +2,21 @@
 
   <div class="container-fluid d-flex justify-content-between align-items-center">
 
-    <!-- Bouton hamburger -->
-      <button type="button"
-          class="btn p-0 border-0 bg-transparent nav-toggle-btn"
-          data-action="click->sidebar#toggle"
-          data-sidebar-target="toggleIcon">
+    <button type="button"
+        class="btn p-0 border-0 bg-transparent nav-toggle-btn"
+        data-action="click->sidebar#open"
+        data-sidebar-target="openButton">
 
-      <!-- Icône hamburger ouvert-->
-      <svg class="icon-hamburger" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"/></svg>
+  <!-- TON SVG hamburger, inchangé -->
+  <svg class="icon-hamburger"
+       xmlns="http://www.w3.org/2000/svg"
+       width="24" height="24" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-linecap="round"
+          stroke-linejoin="round" stroke-width="2"
+          d="M4 6h16M4 12h8m-8 6h16"/>
+  </svg>
 
-
-      <!-- Icône hamburger fermer-->
-      <svg class="icon-arrow hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12h8"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16"/></svg>
-
-
-    </button>
+</button>
 
     <!-- Titre centré -->
     <div class="nav-center position-absolute start-50 translate-middle-x">
