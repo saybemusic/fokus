@@ -1,24 +1,23 @@
-/* Sidebar FIXE */
 .sidebar {
   position: fixed;
-  top: 0;               /* FIX : il ne doit pas commencer à 60px */
+  top: 0;
   left: 0;
   width: 75vw;
-  height: 100vh;        /* FIX : sinon elle ne couvre pas tout */
+  height: 100vh;
   background: white;
-  border-right: 1px solid #eee;
   padding: 20px;
+
   transform: translateX(-75vw);
   transition: transform 0.3s ease;
-  z-index: 2000;        /* FIX : au-dessus de tout */
+
+  z-index: 5000;           /* AU DESSUS DE TOUT */
 }
 
-/* Sidebar ouverte */
 .sidebar.open {
   transform: translateX(0);
 }
 
-/* Le contenu qui se décale */
+/* CONTENU qui bouge */
 .content-wrapper {
   transition: transform 0.3s ease;
 }
@@ -27,28 +26,25 @@
   transform: translateX(75vw);
 }
 
-body {
-  overflow-x: hidden;
-}
-
-/* Alignement icône + texte */
-.sidebar ul li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Overlay */
+/* OVERLAY — Grise page mais PAS nav */
 .overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,0.45);
+
   opacity: 0;
   pointer-events: none;
-  transition: opacity .3s ease;
-  z-index: 1500;        /* FIX : entre sidebar et contenu */
+
+  transition: opacity 0.3s ease;
+
+  z-index: 3000; /* sous navbar (4000), sous sidebar (5000) */
 }
 
+/* DOIT ÊTRE EXACTEMENT CECI */
 .overlay.visible {
   opacity: 1;
   pointer-events: auto;
