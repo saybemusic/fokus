@@ -5,13 +5,11 @@ html, body {
   padding: 0;
 }
 
-// Animation du background
 @keyframes fokusMove {
   0%   { transform: translateY(0); }
-  100% { transform: translateY(-50px); } // ajuste la valeur si besoin
+  100% { transform: translateY(-50px); }
 }
 
-// Container principal fullscreen
 .fk-container {
   position: relative;
   height: 100%;
@@ -21,23 +19,20 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  font-family: Arial, sans-serif;
   overflow: hidden;
 
-  // Contenu au-dessus du background
   > * {
     position: relative;
     z-index: 1;
   }
 
-  // DIV background animé derrière le contenu
   .fk-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 130%; // plus grand que le container
-    background-image: asset-url("FOKUS.png");
+    background-image: asset-url("backgroundForm.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -46,50 +41,49 @@ html, body {
     animation: fokusMove 10s ease-in-out infinite alternate;
   }
 
-  // HEADER
   .fk-header {
     margin-top: 30px;
     margin-bottom: 30px;
 
     .fk-title {
       margin: 0;
-      font-size: 24px;
+      font-size: 40px;
       color: #fff;
       text-align: center;
 
       .fk-dot {
-        color: #ff4fa5; // point rose
+        color: #ff4fa5;
       }
     }
 
     .fk-subtitle {
       margin-top: 8px;
-      font-size: 14px;
+      font-size: 1rem;
       color: #eee;
       text-align: center;
     }
   }
 
-  // FORM WRAPPER
   .fk-form-wrapper {
     width: 100%;
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 20px;
     box-sizing: border-box;
+    font-family: $body-font;
 
     .input {
       margin-bottom: 20px;
     }
 
     label {
-      font-size: 14px;
+      font-size: 0.95rem;
       color: #444;
       margin-bottom: 4px;
       display: block;
+
     }
 
-    // Inputs minimalistes (ligne uniquement)
     input,
     textarea,
     select {
