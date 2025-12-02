@@ -62,7 +62,7 @@ export default class extends Controller {
     if (finalLeft >= this.maxTravel * 0.9) {
       this.element.classList.add("fokus-slider-done")
       this.textTarget.textContent = "Chargement..."
-      window.location.href = "/objectives" // ou <%= objectives_path %> dans un pack ERB
+      window.location.href = "/objectives/new" // ou <%= objectives_path %> dans un pack ERB
     } else {
       this.handleTarget.style.left = "4px"
       this.textTarget.style.opacity = 1
