@@ -10,7 +10,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-<<body data-controller="sidebar">
+<body data-controller="sidebar">
 
   <%= render "shared/navbar" %>
   <%= render "shared/sidebar" %>
@@ -22,7 +22,9 @@
 
   <!-- CONTENU -->
   <div class="content-wrapper" data-sidebar-target="content">
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </div>
 
 </body>
