@@ -11,8 +11,8 @@ Rails.application.routes.draw do
 
   root to: "pages#home"
 
-  resources :objectives, only: [:index, :new, :show, :create, :update, :destroy]
+  resources :objectives
 
-  resources :tasks, only: [:update]
+  resources :tasks, only: [:show]
 
 end
