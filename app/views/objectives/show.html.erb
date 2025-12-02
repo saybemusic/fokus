@@ -13,7 +13,7 @@
   <% @objective.todos.order(:due_date).each do |todo| %>
     <div class="card mb-3">
       <div class="card-header">
-        Jour <%= todo.due_date %> : <%= todo.title %>
+        Jour <%= todo.to_ordered_day() %> : <%= todo.title %>
       </div>
       <div class="card-body">
         <p><%= todo.description %></p>
