@@ -1,16 +1,22 @@
 .navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 4000;
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.navbar-lewagon.shifted {
+  transform: translateX(75vw);
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.hidden {
+  display: none;
 }
 
-.navbar h1 {
-  margin: 0px;
+.nav-toggle-btn svg {
+  transition: opacity .2s ease;
+}
+
+
+.overlay {
+  z-index: 5000 !important;
 }

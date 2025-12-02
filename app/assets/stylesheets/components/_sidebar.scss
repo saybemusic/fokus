@@ -1,0 +1,55 @@
+/* Sidebar FIXE */
+.sidebar {
+  position: fixed;
+  top: 0;               /* FIX : il ne doit pas commencer à 60px */
+  left: 0;
+  width: 75vw;
+  height: 100vh;        /* FIX : sinon elle ne couvre pas tout */
+  background: white;
+  border-right: 1px solid #eee;
+  padding: 20px;
+  transform: translateX(-75vw);
+  transition: transform 0.3s ease;
+  z-index: 2000;        /* FIX : au-dessus de tout */
+}
+
+/* Sidebar ouverte */
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* Le contenu qui se décale */
+.content-wrapper {
+  transition: transform 0.3s ease;
+}
+
+.content-wrapper.shifted {
+  transform: translateX(75vw);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Alignement icône + texte */
+.sidebar ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  z-index: 1500;        /* FIX : entre sidebar et contenu */
+}
+
+.overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}

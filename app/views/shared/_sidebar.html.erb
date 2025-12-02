@@ -1,0 +1,42 @@
+<div class="sidebar" data-sidebar-target="sidebar">
+
+  <h3>Tableau de bord</h3>
+  <ul>
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 ..."/></g></svg>
+      <%= link_to "Profil", root_path %>
+    </li>
+
+    <li>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 ..."/></g></svg>
+      <%= link_to "Progression", root_path %>
+    </li>
+
+    <% if user_signed_in? %>
+      <li>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 ..."/></g></svg>
+        <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %>
+      </li>
+    <% else %>
+      <li>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 ..."/></g></svg>
+        <%= link_to "Se connecter", new_user_session_path %>
+      </li>
+    <% end %>
+  </ul>
+
+  <h3>Mes objectifs</h3>
+  <ul>
+    <% if current_user.present? %>
+      <% current_user.objectives.each do |objective| %>
+        <li>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 ..."/></g></svg>
+          <%= link_to objective.goal, objective_path(objective) %>
+        </li>
+      <% end %>
+    <% else %>
+      <li>Aucun utilisateur connecté</li>
+    <% end %>
+  </ul>
+
+</div>
