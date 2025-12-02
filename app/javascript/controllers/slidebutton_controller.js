@@ -7,8 +7,6 @@ export default class extends Controller {
   connect() {
     this.isDragging = false
     this.startX = 0
-
-    // raccourcis pour éviter de recalculer tout le temps
     this.updateMeasurements()
     window.addEventListener("resize", this.updateMeasurements)
   }
@@ -22,8 +20,6 @@ export default class extends Controller {
     this.maxTravel = this.sliderRect.width - this.handleTarget.offsetWidth - 8
   }
 
-  // ACTIONS
-
   startDrag(event) {
     const clientX = this._clientX(event)
     if (clientX == null) return
@@ -32,7 +28,6 @@ export default class extends Controller {
     this.startX = clientX - this.handleTarget.offsetLeft
     this.element.classList.add("is-dragging")
 
-    // écoute globale pendant le drag
     window.addEventListener("mousemove", this.moveDrag)
     window.addEventListener("mouseup", this.endDrag)
     window.addEventListener("touchmove", this.moveDrag, { passive: true })
@@ -74,7 +69,6 @@ export default class extends Controller {
     }
   }
 
-  // Utilitaire pour gérer souris + tactile + trackpad
   _clientX(event) {
     if (event.touches && event.touches[0]) {
       return event.touches[0].clientX

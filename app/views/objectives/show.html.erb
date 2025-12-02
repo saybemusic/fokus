@@ -18,20 +18,6 @@
       <div class="card-body">
         <p><%= todo.description %></p>
 
-        <% if todo.tasks.any? %>
-          <ul>
-            <% todo.tasks.order(:priority).each do |task| %>
-              <li>
-                <strong><%= task.title %></strong>
-                <% if task.ressource_ia.present? %>
-                  - <a href="<%= task.ressource_ia %>" target="_blank">Ressource IA</a>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p>Aucune tâche pour ce jour.</p>
-        <% end %>
       </div>
     </div>
   <% end %>
