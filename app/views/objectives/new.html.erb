@@ -1,21 +1,18 @@
-<div class="form-container">
-  <%= simple_form_for @objective do |f| %>
-    <%= f.input :goal, label: "Objectif", required: true %>
+<div class="fk-container">
+  <div class="fk-bg"></div>
 
-    <%= f.input :time_due,
-                label: "Durée du programme (jours)",
-                as: :integer,
-                input_html: { min: 1, required: true } %>
+  <div class="fk-header">
+    <h1 class="fk-title">Créer votre programme<span class="fk-dot">.</span></h1>
+    <p class="fk-subtitle">Remplissez les informations ci-dessous pour générer votre programme personnalisé.</p>
+  </div>
 
-    <%= f.input :time_global,
-                label: "Temps quotidien disponible (minutes)",
-                as: :integer,
-                input_html: { min: 1, required: true } %>
-
-    <%= f.input :resume,
-                label: "Résumé / Notes (optionnel)",
-                as: :text %>
-
-    <%= f.button :submit, "Générer le programme", class: "btn" %>
-  <% end %>
+  <div class="fk-form-wrapper">
+    <%= simple_form_for @objective do |f| %>
+      <%= f.input :goal, label: "Objectif", required: true %>
+      <%= f.input :time_due, label: "Durée du programme (jours)", as: :integer, input_html: { min: 1, required: true } %>
+      <%= f.input :time_global, label: "Temps quotidien disponible (minutes)", as: :integer, input_html: { min: 1, required: true } %>
+      <%= f.input :resume, label: "Résumé / Notes (optionnel)", as: :text %>
+      <%= f.button :submit, "Générer le programme", class: "fk-btn" %>
+    <% end %>
+  </div>
 </div>
