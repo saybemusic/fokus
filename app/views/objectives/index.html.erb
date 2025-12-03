@@ -1,38 +1,38 @@
-<div class="programmes-page">
-  <div class="objective-container">
+<div class="programmes-page fk-container">
   <div class="fk-bg"></div>
-    <h1>Mes Programmes</h1>
 
-    <% if @objectives.any? %>
-      <% @objectives.each do |objective| %>
-        <div class="programmes-carte mb-3" onclick="window.location='<%= objective_path(objective) %>'">
+  <header class="programmes-header">
+    <h1>Mes Programmes<span class="programmes-dot">.</span></h1>
+  </header>
 
-          <div class="programmes-carte-header" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
-            <strong><%= objective.goal %></strong>
-          </div>
-
-          <div class="programmes-carte-body">
-            <%= objective.resume %>
-            <p>Temps quotidien : <%= objective.time_global %> min</p>
+  <div class="programmes-main-card">
+    <div class="programmes-cards-scroll">
+      <% if @objectives.any? %>
+        <% @objectives.each do |objective| %>
+          <div class="programmes-carte">
+            <%= link_to objective_path(objective), class: "programmes-carte-link" do %>
+              <div class="programmes-carte-header" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
+                <p><%= objective.goal %></p>
+              </div>
+              <div class="programmes-carte-body">
+                <p><%= objective.resume %></p>
+                <p>Temps quotidien : <%= objective.time_global %> min</p>
+                <p>Durée du programme : <%= objective.time_due %> jours</p>
+              </div>
+            <% end %>
 
             <div class="programme-footer">
-              <span>Durée du programme : <%= objective.time_due %> jours</span>
-
-              <!-- BOUTON SUPPRIMER – maintenant valide -->
               <%= link_to objective_path(objective),
                   data: { turbo_method: :delete, turbo_confirm: "Supprimer ?" },
-                  class: "programmes-delete-btn",
-                  onclick: "event.stopPropagation();" do %>
+                  class: "programmes-delete-btn" do %>
                 <%= image_tag "bin.svg", alt: "Supprimer" %>
               <% end %>
-
             </div>
           </div>
-
-        </div>
+        <% end %>
+      <% else %>
+        <p>Aucun programme généré pour cet objectif.</p>
       <% end %>
-    <% else %>
-      <p>Aucun programme généré pour cet objectif.</p>
-    <% end %>
+    </div>
   </div>
 </div>
