@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   resources :objectives
 
-  resources :tasks, only: [:show]
+  resources :todos, only: [:show]
+
+  resources :tasks, only: [:index, :update]
 
 end
