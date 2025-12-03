@@ -34,7 +34,7 @@ html, body {
 }
 
 .fk-container {
-  position: absolute;
+  position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -45,6 +45,7 @@ html, body {
 
   > * {
     position: relative;
+    width: 100%;
     z-index: 1;
   }
 
@@ -143,12 +144,14 @@ html, body {
       cursor: pointer;
       margin-top: 10px;
       text-decoration: none;
+      text-align: center;
     }
 
      .fk-p {
       margin-top: 16px;
       font-size: 1rem;
       color: #eee;
+      text-align: center;
     }
 
 
