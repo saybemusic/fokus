@@ -1,20 +1,27 @@
-<h2>Log in</h2>
+<div class="fk-page">
+  <div class="fk-bg"></div>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
+  <div class="fk-container">
+    <div class="fk-header">
+      <h1 class="fk-title">Se connecter<span class="fk-dot">.</span></h1>
+    </div>
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="fk-form-wrapper">
+      <%= f.input :email,
                 required: false,
                 autofocus: true,
                 input_html: { autocomplete: "email" } %>
     <%= f.input :password,
+                label: "Mots de passe",
                 required: false,
                 input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
+    <%= f.input :remember_me, as: :boolean, label: "Se souvenir de moi", input_html: { class: "no-style" } if devise_mapping.rememberable? %>
+                <div class="form-actions">
+    <%= f.button :submit, "Se connecter", class: "fk-btn" %>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+    </div>
+    <p class="fk-p">Pas inscrit ?</p>
+    <%= link_to "Inscription", new_user_registration_path, class: "fk-bouton", role: "button" %>
+  </div>
+</div>

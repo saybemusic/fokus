@@ -1,10 +1,15 @@
-<h2>Sign up</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+<div class="fk-page">
+  <div class="fk-bg"></div>
 
-  <div class="form-inputs">
-    <%= f.input :first_name,
+  <div class="fk-container">
+    <div class="fk-header">
+      <h1 class="fk-title">Créer votre compte<span class="fk-dot">.</span></h1>
+    </div>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
+    <div class="fk-form-wrapper">
+      <%= f.input :first_name,
                 label: "Prénom",
                 required: true,
                 autofocus: true,
@@ -19,17 +24,21 @@
                 autofocus: true,
                 input_html: { autocomplete: "email" }%>
     <%= f.input :password,
+                label: "Mot de passe",
                 required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
     <%= f.input :password_confirmation,
+                label: "Confirmer le mot de passe",
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
-  </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+                <div class="form-actions">
+                  <%= f.button :submit, "Inscription", class: "fk-btn" %>
+                </div>
+                  <% end %>
+    </div>
+    <p class="fk-p">Déja inscrit ?</p>
+    <%= link_to "Se connecter", new_user_session_path, class: "fk-bouton", role: "button" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
