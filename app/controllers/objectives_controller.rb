@@ -1,15 +1,15 @@
 class ObjectivesController < ApplicationController
   before_action :set_objective, only: [:show, :update, :destroy]
 
-SYSTEM_PROMPT = <<~PROMPT
+  SYSTEM_PROMPT = <<~PROMPT
   You are an expert planner specializing in pedagogy and learning program design.
 
   Your mission: create a structured learning program based on the user's information.
 
   User inputs:
-  - Goal: #{:objectif}
-  - Program duration in days: #{:duree_programme}
-  - Daily available time in minutes: #{:temps_quotidien}
+  - Goal: objectif
+  - Program duration in days: duree_programme
+  - Daily available time in minutes: temps_quotidien
 
   Constraints:
   1. Each todo represents one day of the program.
@@ -42,30 +42,29 @@ SYSTEM_PROMPT = <<~PROMPT
 
   Generate the complete program for the total number of requested days, with detailed todos and tasks.
   Return strictly the JSON only, with no explanations or additional text.
-PROMPT
+  PROMPT
 
-def index
-  @objectives = current_user.objectives
-end
+  def index
+    @objectives = current_user.objectives
+  end
 
-def new
-  @user = current_user
-  @objective = current_user.objectives.new
-end
+  def new
+    @user = current_user
+    @objective = current_user.objectives.new
+  end
 
-def show
-  @objective = Objective.find(params[:id])
-  
-end
+  def show
+    @objective = Objective.find(params[:id])
+  end
 
   def create
 
-    @objective = Objective.new(params[:id])
+    @objective = Objective.new(objective_params)
     @objective.user = current_user
     @objective.system_prompt = SYSTEM_PROMPT
-    @objective.goal = params[:goal]
-    @objective.time_due = params[:time_due]
-    @objective.time_global = params[:time_global]
+    # @objective.goal = params[:goal]
+    # @objective.time_due = params[:time_due]
+    # @objective.time_global = params[:time_global]
 
     if @objective.save
       program_data = generate_program_llm(
@@ -81,73 +80,70 @@ end
       end
     end
 
-    def update
-      if @objective.update(objective_params)
-        redirect_to @objective, notice: "Objectif mis à jour avec succès."
-      else
-        render :edit, status: :unprocessable_entity
-      end
+  def update
+    if @objective.update(objective_params)
+      redirect_to @objective, notice: "Objectif mis à jour avec succès."
+    else
+      render :edit, status: :unprocessable_entity
     end
+  end
 
-    def destroy
-      @objective.destroy
-      redirect_to objectives_path, notice: "Objectif supprimé."
-    end
+  def destroy
+    @objective.destroy
+    redirect_to objectives_path, notice: "Objectif supprimé."
+  end
 
-    private
+  private
 
-    def set_objective
-      @objective = current_user.objectives.find(params[:id])
-    end
+  def set_objective
+    @objective = current_user.objectives.find(params[:id])
+  end
 
-    def objective_params
-      params.require(:objective).permit(
-        :goal,
-        :resume,
-        :time_global,
-        :time_due
-        )
-      end
+  def objective_params
+    params.require(:objective).permit(
+      :goal,
+      :resume,
+      :time_global,
+      :time_due
+      )
+  end
 
-      def generate_program_llm(goal:, time_global:, time_due:)
-        ruby_llm = RubyLLM.chat
-        llm_request = ruby_llm.with_instructions(SYSTEM_PROMPT)
+  def generate_program_llm(goal:, time_global:, time_due:)
+    ruby_llm = RubyLLM.chat
+    llm_request = ruby_llm.with_instructions(SYSTEM_PROMPT)
 
-        response = llm_request.ask({
-          objectif: @objective.goal,
-          duree_programme: @objective.time_due,
-          temps_quotidien: @objective.time_global
-        }.to_json)
+    response = llm_request.ask({
+      objectif: @objective.goal,
+      duree_programme: @objective.time_due,
+      temps_quotidien: @objective.time_global
+      }.to_json)
         response = JSON.parse(response.content)
         JSON::ParserError
-        { "todos" => [] }
+        # { "todos" => [] }
         response
-      end
+  end
 
-      def create_todos_and_tasks(objective, data)
+  def create_todos_and_tasks(objective, data)
 
-        data["todos"].each do |todo_data|
-          @todo = Todo.new(
-            due_date:  Date.current + (todo_data["day"] - 1),
-            title: todo_data["title"],
-            description: todo_data["description"],
+    data["todos"].each do |todo_data|
+    @todo = Todo.new(
+      due_date:  Date.current + (todo_data["day"] - 1),
+      title: todo_data["title"],
+      description: todo_data["description"],
+      )
+        @todo.objective_id = objective.id
+        @todo.save
+
+          todo_data["tasks"].each do |task_data|
+          @task = Task.new(
+            title: task_data["description"],
+            # ressource_ia: task_data["ressource_ia"],
+            priority: task_data["priority"],
+            todo_id: @todo
             )
-            @todo.objective_id = objective.id
-            @todo.save
-
-
-
-            todo_data["tasks"].each do |task_data|
-              @task = Task.new(
-                title: task_data["description"],
-                # ressource_ia: task_data["ressource_ia"],
-                priority: task_data["priority"],
-                todo_id: @todo
-                )
-                @task.todo_id = @todo.id
-                @task.save
-            end
-        end
-
+              @task.todo_id = @todo.id
+              @task.save
+          end
       end
+  end
 end
