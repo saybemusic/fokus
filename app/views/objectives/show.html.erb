@@ -1,4 +1,4 @@
-<div class="objective-container">
+<div class="objective-container fk-container">
   <h1>Objectif : <%= @objective.goal %></h1>
   <p><%= @objective.resume %></p>
   <p><strong>Durée totale :</strong> <%= @objective.time_due %> jours</p>
@@ -12,7 +12,7 @@
     <% if @objective.todos.any? %>
       <% @objective.todos.order(:due_date).each do |todo| %>
         <div class="carte mb-3">
-          <div class="carte-header">
+          <div class="carte-header" style="background-image: url('<%= image_path("backgroundHome.png") %>'); background-size: cover;">
             Jour <%= todo.to_ordered_day() %> : <%= todo.title %>
           </div>
           <hr>
@@ -32,5 +32,5 @@
 </div>
 
 <div class="btn-FOKUS">
-  <%= link_to "Commencer", root_path, class: "bouton" %>
+  <%= link_to "COMMENCER", root_path, class: "bouton" %>
 </div>
