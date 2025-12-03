@@ -23,7 +23,7 @@ html, body {
   background-repeat: no-repeat;
 
   animation: fokusMove 5s ease-in-out infinite alternate;
-  z-index: 0;
+  z-index: -1;
   will-change: transform;
 }
 
