@@ -1,12 +1,18 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:update]
+  before_action :set_task, except: [:update]
+
+  def index
+    @tasks = Task.all
+  end
 
   def update
-    if @task.update(task_params)
-      redirect_to @task.todo, notice: "Tâche mise à jour."
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    @objective = Objective.find(params[:id])
+    @todo = ""
+    todo_of_day(@objective)
+    @task = Task.where(id:params[:task])
+    @task.update(completed: true)
+    redirect_to todo_path(@objective)
+    # raise
   end
 
   private
@@ -15,13 +21,26 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
+  def todo_of_day(objective)
+    objective.todos.each do |todo|
+      if todo.completed
+        @todo_yesterday = todo
+      else
+        @todo = todo
+        return
+      end
+    end
+  end
+
+
   def task_params
     params.require(:task).permit(
       :title,
       :ressource_ia,
       :completed,
       :priority,
-      :completed_at
+      :completed_at,
+      :todo_id
     )
   end
 end

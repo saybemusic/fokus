@@ -1,18 +1,23 @@
-<h1>Todos</h1>
-<% if @objectives.any? %>
+<h1> <%= @todo.title %></h1>
+    <%# <%= debug @todo %>
+<div>
   <ul>
-    <% @objectives.each do |objective| %>
-      <li class="mb-3">
-        <strong><%= objective.goal %></strong><br>
-        <%= objective.resume %><br>
-        <small>Temps quotidien : <%= objective.time_global %> min</small><br>
-        <small>Durée du programme : <%= objective.time_due %> jours</small><br>
-        <%= link_to "Voir", objective_path(objective), class: "btn btn-info btn-sm" %>
-        <%# <%= link_to "Éditer", edit_objective_path(objective), class: "btn btn-warning btn-sm" %>
-        <%= link_to "Supprimer", objective_path(objective), data: {turbo_method: :delete, turbo_confirm: "Supprimer ?" }, class: "btn btn-danger btn-sm" %>
-      </li>
+    <% @todo.tasks.each do |task| %>
+    <% if task.completed  %>
+      <div class = "d-flex tache faite">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/><path stroke-linecap="round" d="m16 24l6 6l12-12"/></g></svg>
+        <p><%= task.title %></p>
+      </div>
+    <% else %>
+      <%= link_to task_path(@objective, task: task), data: { turbo_method: :patch } do %>
+        <div class = "tache a-faire">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/></g></svg>
+          <p> <%= task.title %> </p>
+        </div>
+      <% end %>
+    <% end %>
+
     <% end %>
   </ul>
-<% else %>
-  <p>Aucun objectif pour le moment.</p>
-<% end %>
+
+</div>
