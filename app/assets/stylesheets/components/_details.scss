@@ -1,9 +1,9 @@
 summary::-webkit-details-marker {
-  display: none; /* Chrome, Safari */
+  display: none; /* Safari */
 }
 
 summary::marker {
-  content: ""; /* Firefox */
+  content: ""; /* Chrome - Firefox */
 }
 
 summary {
