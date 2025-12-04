@@ -1,29 +1,39 @@
-<h1> <%= @todo.title %></h1>
-<p><strong>Jour</strong> <%= @todo.to_ordered_day() %></p>
-<div>
-  <ul>
-    <% @todo.tasks.each do |task| %>
-      <% if task.completed  %>
-        <div class = "d-flex tache faite">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/><path stroke-linecap="round" d="m16 24l6 6l12-12"/></g></svg>
-          <p><%= task.title %></p>
-        </div>
-      <% else %>
-        <%= link_to task_path(@objective, task: task), data: { turbo_method: :patch } do %>
+<div class="fk-bg"></div>
+
+<div class="d-flex flex-column align-items-center justify-content-center">
+
+  <div class="task-card">
+      <h1> <%= @todo.title %></h1>
+      <p><strong>Jour</strong> <%= @todo.to_ordered_day() %></p>
+    <ul>
+      <% @todo.tasks.each do |task| %>
+        <% if task.completed  %>
+          <div class = "faite">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/><path stroke-linecap="round" d="m16 24l6 6l12-12"/></g></svg>
+              <p><%= task.title %></p>
+            </div>
+
+        <% else %>
           <div class = "tache a-faire">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/></g></svg>
-            <p> <%= task.title %> </p>
+            <div class="task-header blanc">
+              <%= link_to task_path(@objective, task: task), data: { turbo_method: :patch }, class: "blanc" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/></g></svg>
+              <% end %>
+              <p> <%= task.title %> </p>
+            </div>
+            <div class="p-1">
+              <details>
+                <summary>Comment faire ?</summary>
+                <p class="p-2"><%= task.ressource_ia %></p>
+              </details>
+            </div>
+
           </div>
         <% end %>
-        <details class="ressources-ia">
-          <summary>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10m0-2a8 8 0 1 0 0-16a8 8 0 0 0 0 16m-1-5h2v2h-2zm2-1.645V14h-2v-1.5a1 1 0 0 1 1-1a1.5 1.5 0 1 0-1.471-1.794l-1.962-.393A3.501 3.501 0 1 1 13 13.355"/></svg>
-          </summary>
-          <a href="<%= task.ressource_ia %>" style="text-decoration: none; color: black;">Voici un peu d'aide</a>
-        </details>
       <% end %>
-    <% end %>
-  </ul>
+    </ul>
+
     <% if @objective_completed == true %>
       <% if @todo_just_completed == true %>
         <p>Bravo vous avez atteint votre objectif</p>
@@ -38,5 +48,9 @@
             class: "bouton" %>
       <% end %>
     <% end %>
+  </div>
+  <div class="bouton mb-3">
+   <%= link_to "FOKUS NOW", class: "bouton" %>
+  </div>
 
 </div>

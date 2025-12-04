@@ -30,12 +30,7 @@ class TodosController < ApplicationController
         @objective_completed = false
       end
     end
-
-
   end
-
-    # si todos du jour précedent (todos.completed_at), donc passer a todos suivante
-    # sinon reprendre la todo non terminée
 
   def update
     @objective = Objective.find(params[:id])

@@ -1,12 +1,20 @@
 summary::-webkit-details-marker {
-  display: none; /* Chrome, Safari */
+  display: none; /* Safari */
 }
 
 summary::marker {
-  content: ""; /* Firefox */
+  content: ""; /* Chrome - Firefox */
 }
 
 summary {
   position: relative;
-  padding-left: 30px; /* espace pour icône */
+  list-style: none; // Firefox
+}
+
+details {
+  text-align: center;
+}
+
+details p {
+  text-align: left;
 }
