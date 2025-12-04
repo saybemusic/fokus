@@ -19,4 +19,8 @@ Rails.application.routes.draw do
 
   get "todos/:id/next_day", to: "todos#next_day", as: :next_day
 
+  get "/stats", to: "stats#index", as: :stats
+
+  get "/stats/objectives", to: "stats#objectives", as: :stats_objectives
+
 end

@@ -1,0 +1,35 @@
+<div class="stats-wrapper">
+  <div class="stats-background"></div>
+
+  <header class="stats-header">
+    <h1 class="stats-title">
+      Statistiques de mes objectifs<span class="stats-title-dot">.</span>
+    </h1>
+  </header>
+
+  <div class="stats-container">
+
+    <% @objectives.each do |objective| %>
+
+      <div class="stats-large-card">
+
+        <div class="stats-card-title stats-large-card-title"
+          style="background-image: url('<%= image_path("backgroundHome.png") %>');">
+          <%= objective.goal %>
+        </div>
+
+        <div class="stats-large-card-body">
+          <canvas
+            width="900"
+            height="180"
+            data-controller="heatmap"
+            data-heatmap-data-value="<%= @heatmaps[objective.id].to_json %>">
+          </canvas>
+        </div>
+
+      </div>
+
+    <% end %>
+
+  </div>
+</div>

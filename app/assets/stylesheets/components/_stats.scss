@@ -1,0 +1,107 @@
+/* PAGE WRAPPER */
+.stats-wrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* BACKGROUND ANIMÉ */
+.stats-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130%;
+  background-image: asset-url("backgroundForm.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: statsMove 6s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+@keyframes statsMove {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-40px); }
+}
+
+/* HEADER */
+.stats-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.stats-title {
+  color: white;
+  font-size: 36px;
+}
+
+.stats-title-dot {
+  color: #ff4fa5;
+}
+
+/* CONTAINER PRINCIPAL */
+.stats-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* GRID DES CARTES */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* CARTE */
+.stats-card {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* TITRE CARTE AVEC IMAGE */
+.stats-card-title {
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  background-size: cover;
+  background-position: center;
+}
+
+/* BODY CARTE */
+.stats-card-body {
+  padding: 20px;
+  text-align: center;
+}
+
+.stats-card-number {
+  font-size: 28px;
+  font-weight: bold;
+  color: #222;
+}
+
+/* GRANDE CARTE */
+.stats-large-card {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.stats-large-card-title {
+  padding: 16px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  background-size: cover;
+  background-position: center;
+}
+
+.stats-large-card-body {
+  padding: 20px;
+}
