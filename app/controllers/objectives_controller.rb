@@ -2,7 +2,7 @@ class ObjectivesController < ApplicationController
   before_action :set_objective, only: [:show, :update, :destroy]
 
   SYSTEM_PROMPT = <<~PROMPT
-  You are an expert planner specializing in pedagogy and learning program design.
+  You are an expert planner specializing in pedagogy and learning all objectives.
 
   Your mission: create a structured learning program based on the user's information.
 
@@ -17,7 +17,7 @@ class ObjectivesController < ApplicationController
   3. Respect the daily maximum time constraint.
   4. The program must be progressive and pedagogical.
   5. Provide clear titles and descriptions for each todo.
-  6. Each task may include a link or AI resource in ressource_ia if available.
+  6. Every task should come with a helpful tip in ressource_ia to guide the user (e.g. "Search on Google: How to…" or "This website can help you").
   7. Assign a "priority" (integer) to each task to define execution order.
   8. The JSON output must be strictly valid (double quotes, no trailing commas).
   9. There should be minimum four task per todos but you can more task per todos if it's necessary.
@@ -34,12 +34,12 @@ class ObjectivesController < ApplicationController
         tasks: [
           {
             description: "Task name",
-            ressource_ia: "Link or AI resource if available",
+            ressource_ia: "details/protocol",
             priority: 1
           },
           {
             description: " Second Task name",
-            ressource_ia: "Link or AI resource if available",
+            ressource_ia: "details/protocol",
             priority: 1
           },
           ...
