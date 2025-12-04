@@ -1,0 +1,12 @@
+summary::-webkit-details-marker {
+  display: none; /* Chrome, Safari */
+}
+
+summary::marker {
+  content: ""; /* Firefox */
+}
+
+summary {
+  position: relative;
+  padding-left: 30px; /* espace pour icône */
+}

@@ -12,6 +12,7 @@ class TodosController < ApplicationController
       @todo_just_completed = true
     end
     todo_of_day(@objective)
+    # raise
   end
 
     # si todos du jour précedent (todos.completed_at), donc passer a todos suivante

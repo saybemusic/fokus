@@ -137,9 +137,9 @@ class ObjectivesController < ApplicationController
           todo_data["tasks"].each do |task_data|
           @task = Task.new(
             title: task_data["description"],
-            # ressource_ia: task_data["ressource_ia"],
             priority: task_data["priority"],
-            todo_id: @todo
+            todo_id: @todo,
+            ressource_ia: task_data["ressource_ia"]
             )
               @task.todo_id = @todo.id
               @task.save
