@@ -2,7 +2,7 @@
   <div class="fk-bg"></div>
 
   <header class="programmes-header">
-    <h1>Mes Programmes<span class="programmes-dot">.</span></h1>
+    <h1>Mes objectifs<span class="programmes-dot">.</span></h1>
   </header>
 
   <div class="programmes-main-card">
@@ -30,8 +30,25 @@
             </div>
           </div>
         <% end %>
+        <%= link_to "CREER UN NOUVEL OBJECTIF",
+            new_objective_path,
+            class: "bouton" %>
       <% else %>
-        <p>Aucun programme généré pour cet objectif.</p>
+       <h2>Aucun objectif.</h2>
+
+        <div class="fokus-slider"
+          data-controller="slidebutton"
+          data-slidebutton-target="slider">
+          <span class="fokus-slider-text" data-slidebutton-target="text">
+            CREER UN OBJECTIF
+          </span>
+
+          <div class="fokus-slider-handle"
+              data-slidebutton-target="handle"
+              data-action="mousedown->slidebutton#startDrag touchstart->slidebutton#startDrag">
+            <span class="fokus-slider-arrow">›</span>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>
