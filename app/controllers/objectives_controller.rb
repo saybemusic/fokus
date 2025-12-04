@@ -20,6 +20,8 @@ class ObjectivesController < ApplicationController
   6. Each task may include a link or AI resource in ressource_ia if available.
   7. Assign a "priority" (integer) to each task to define execution order.
   8. The JSON output must be strictly valid (double quotes, no trailing commas).
+  9. There should be minimum four task per todos but you can more task per todos if it's necessary.
+  10. Every value should be in french
 
   MANDATORY output format:
 
@@ -34,7 +36,13 @@ class ObjectivesController < ApplicationController
             description: "Task name",
             ressource_ia: "Link or AI resource if available",
             priority: 1
-          }
+          },
+          {
+            description: " Second Task name",
+            ressource_ia: "Link or AI resource if available",
+            priority: 1
+          },
+          ...
         ]
       }
     ]

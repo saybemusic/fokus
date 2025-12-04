@@ -4,15 +4,34 @@ class TodosController < ApplicationController
     @todo_yesterday = ""
     @todo = ""
     @taskDone = 0
+    @todoDone = 0
     todo_of_day(@objective)
     numberOfTask = @todo.tasks.count
+    numberOfTodo = @objective.todos.count
+    @todo_just_completed = false
+    @objective_completed = false
+
     @todo.tasks.each do |task|
       @taskDone += 1 if task.completed
-      @todo.update(completed: true) if numberOfTask == @taskDone
-      @todo_just_completed = true
+      if numberOfTask == @taskDone
+        @todo.update(completed: true)
+        @todo_just_completed = true
+      else
+        @todo_just_completed = false
+      end
     end
-    todo_of_day(@objective)
-    # raise
+
+    @objective.todos.each do |todo|
+      @todoDone += 1 if todo.completed
+      if numberOfTodo == @todoDone
+        @objective.update(completed: true)
+        @objective_completed = true
+      else
+        @objective_completed = false
+      end
+    end
+
+
   end
 
     # si todos du jour précedent (todos.completed_at), donc passer a todos suivante
@@ -25,6 +44,12 @@ class TodosController < ApplicationController
     todo_of_day(@objective)
     @todo.task.update(completed: true)
 
+  end
+
+  def next_day
+    @objective = Objective.find(params[:id])
+    todo_of_day(@objective)
+    redirect_to todo_path(@objective)
   end
 
   private
