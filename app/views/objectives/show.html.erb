@@ -1,36 +1,53 @@
-<div class="objective-container fk-container">
-  <h1>Objectif : <%= @objective.goal %></h1>
-  <p><%= @objective.resume %></p>
-  <p><strong>Durée totale :</strong> <%= @objective.time_due %> jours</p>
-  <p><strong>Temps quotidien disponible :</strong> <%= @objective.time_global %> minutes</p>
+<div class="programmes-page fk-container">
 
-  <hr>
+  <div class="fk-bg"></div>
 
-  <h2>Programme détaillé</h2>
-
-  <div class="objective-details">
-    <% if @objective.todos.any? %>
-      <% @objective.todos.order(:due_date).each do |todo| %>
-        <div class="carte mb-3">
-          <div class="carte-header" style="background-image: url('<%= image_path("backgroundHome.png") %>'); background-size: cover;">
-            Jour <%= todo.to_ordered_day() %> : <%= todo.title %>
-          </div>
-          <hr>
-          <div class="carte-body">
-            <p><%= todo.description %></p>
-          </div>
-        </div>
-      <% end %>
-    <% else %>
-      <p>Aucun programme généré pour cet objectif.</p>
-    <% end %>
-
-    <div class="btn-back">
-      <%= link_to "Retour aux objectifs", objectives_path, class: "bouton" %>
+    <div class="fk-header">
+      <h1 class="fk-title"><%= @objective.goal %></h1>
+      <p class="fk-subtitle"><%= @objective.resume %></p>
+      <p class="fk-subtitle">
+        <strong>Durée totale :</strong> <%= @objective.time_due %> jours
+      </p>
+      <p class="fk-subtitle">
+        <strong>Temps quotidien disponible :</strong>
+        <%= @objective.time_global %> minutes
+      </p>
     </div>
-  </div>
-</div>
+    <hr>
 
-<div class="btn-FOKUS">
-  <%= link_to "COMMENCER", todo_path(@objective), class: "bouton" %>
-</div>
+    <h2 class="fk-subtitle">Programme détaillé</h2>
+
+    <div class="programmes-main-card">
+    <div class="programmes-cards-scroll">
+      <% if @objective.todos.any? %>
+        <% @objective.todos.order(:due_date).each do |todo| %>
+
+          <div class="programmes-carte">
+            <div class="programmes-carte-header"
+                 style="background-image: url('<%= image_path("backgroundHome.png") %>');
+                        background-size: cover;">
+              Jour <%= todo.to_ordered_day() %> : <%= todo.title %>
+            </div>
+
+            <div class="programmes-carte-body">
+              <p><%= todo.description %></p>
+            </div>
+          </div>
+        <% end %>
+        <% else %>
+          <p>Aucun programme généré pour cet objectif.</p>
+        <% end %>
+      <div class="btn-back">
+        <%= link_to "Retour aux objectifs", objectives_path, class: "bouton" %>
+      </div>
+      </div>
+      </div>
+
+
+      <div class="btn-FOKUS">
+        <%= link_to "COMMENCER", todo_path(@objective), class: "bouton" %>
+      </div> <!-- objective-details -->
+
+  </div> <!-- fk-container -->
+
+</div> <!-- fk-page -->
