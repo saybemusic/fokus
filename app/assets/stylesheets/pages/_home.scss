@@ -87,12 +87,16 @@
   color: #555;
 }
 
+#last-feature-card {
+  margin-bottom: 90px;
+}
+
 .fokus-slider {
   position: fixed;
-  bottom: env(safe-area-inset-bottom, 20px);;
+  bottom: env(safe-area-inset-bottom, 10px);
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
+  width: 90%;
   max-width: 320px;
   margin: 40px auto ;
   height: 56px;
