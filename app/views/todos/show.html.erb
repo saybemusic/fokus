@@ -1,23 +1,36 @@
 <h1> <%= @todo.title %></h1>
-    <%# <%= debug @todo %>
+<p><strong>Jour</strong> <%= @todo.to_ordered_day() %></p>
 <div>
   <ul>
     <% @todo.tasks.each do |task| %>
-    <% if task.completed  %>
-      <div class = "d-flex tache faite">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/><path stroke-linecap="round" d="m16 24l6 6l12-12"/></g></svg>
-        <p><%= task.title %></p>
-      </div>
-    <% else %>
-      <%= link_to task_path(@objective, task: task), data: { turbo_method: :patch } do %>
-        <div class = "tache a-faire">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/></g></svg>
-          <p> <%= task.title %> </p>
+      <% if task.completed  %>
+        <div class = "d-flex tache faite">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/><path stroke-linecap="round" d="m16 24l6 6l12-12"/></g></svg>
+          <p><%= task.title %></p>
         </div>
+      <% else %>
+        <%= link_to task_path(@objective, task: task), data: { turbo_method: :patch } do %>
+          <div class = "tache a-faire">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/></g></svg>
+            <p> <%= task.title %> </p>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
-
-    <% end %>
   </ul>
+    <% if @objective_completed == true %>
+      <% if @todo_just_completed == true %>
+        <p>Bravo vous avez atteint votre objectif</p>
+        <%= link_to "VOIR MES OBJECTIFS",
+            objectives_path(@objective),
+            class: "bouton" %>
+      <% end %>
+    <% else %>
+      <% if @todo_just_completed == true %>
+        <%= link_to "Passer au jour suivant",
+            next_day_path(@objective),
+            class: "bouton" %>
+      <% end %>
+    <% end %>
 
 </div>
