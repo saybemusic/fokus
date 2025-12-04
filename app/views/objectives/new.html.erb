@@ -9,10 +9,33 @@
 
     <div class="fk-form-wrapper">
       <%= simple_form_for @objective do |f| %>
-        <%= f.input :goal, label: "Objectif", required: true %>
-        <%= f.input :time_due, label: "Durée du programme (jours)", as: :integer, input_html: { min: 1, required: true } %>
-        <%= f.input :time_global, label: "Temps quotidien disponible (minutes)", as: :integer, input_html: { min: 1, required: true } %>
-        <%= f.input :resume, label: "Résumé / Notes (optionnel)", as: :text %>
+        <%= f.input :goal, label: "Objectif", required: true,
+                    input_html: { required: true },
+                    error: "L'objectif est requis" %>
+        <%= f.input :time_due, label: "Durée du programme (jours)",
+                    as: :integer, required: true,
+                    input_html: { min: 1, required: true },
+                    error: "La durée est requis" %>
+        <%= f.input :time_global, label: "Temps quotidien disponible (minutes)",
+                    as: :select, required: true,
+                    collection: [
+                    ['5 min', 5],
+                    ['15 min', 15],
+                    ['30 min', 30],
+                    ['45 min', 45],
+                    ['1 heure', 60],
+                    ['2 heures', 120],
+                    ['3 heures', 180],
+                    ['4 heures', 240],
+                    ['5 heures', 300],
+                    ],
+                    input_html: { required: true, class: 'time-select' },
+                    error: "Le temps quotidien est requis" %>
+
+        <%= f.input :resume, label: "Résumé / Notes (optionnel)", as: :text,
+                    input_html: {
+                    required: true,
+                    style: 'resize: none;'} %>
         <%= f.button :submit, "Générer le programme", class: "fk-btn" %>
       <% end %>
     </div>
