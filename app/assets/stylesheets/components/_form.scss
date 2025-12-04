@@ -81,8 +81,6 @@ html, body {
     box-sizing: border-box;
     font-family: $body-font;
 
-
-
     .input {
       margin-bottom: 20px;
     }
@@ -109,9 +107,7 @@ html, body {
       transition: border-color 0.25s ease;
 
       &:focus {
-        border-bottom-color: #ff4fa5;
-        outline: none;
-        box-shadow: none;
+        border-bottom-color: #007bff;
       }
     }
 
@@ -133,6 +129,8 @@ html, body {
     }
   }
 }
+
+
 
 .fk-bouton {
       background-color: $noir;
