@@ -35,8 +35,16 @@
   gap: 10px;
 }
 
+.sidebar-header-obj {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  margin-top: 0px;
+}
+
 .sidebar ul {
-  padding: 16px;
+  padding: 8px 16px;
   margin: 0;
 }
 
@@ -67,7 +75,7 @@
 
 
 .sidebar h3.dashboard-title {
-  margin-top: 35px;
+  margin-top: 15px;
 }
 
 
@@ -84,4 +92,10 @@
 .overlay.visible {
   opacity: 1;
   pointer-events: auto;
+}
+
+.hr-rose {
+    border: 0;
+    border-top: 1.2px solid #ff4fa5;
+    margin: 8px 0;
 }
