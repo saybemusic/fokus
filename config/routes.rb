@@ -17,4 +17,6 @@ Rails.application.routes.draw do
 
   resources :tasks, only: [:index, :update]
 
+  get "todos/:id/next_day", to: "todos#next_day", as: :next_day
+
 end
