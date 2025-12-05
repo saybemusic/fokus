@@ -65,8 +65,10 @@
 }
 
 .feature-card {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
   margin-top: 8px;
-  padding: 8px 16px;
   border-radius: 14px;
   background: #ffffff;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
@@ -74,7 +76,25 @@
 }
 
 .feature-card:hover {
-  transform: scale(0.96);
+  transform: scale(0.98);
+}
+
+.left-part {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:$blanc;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.right-part {
+  width: 85%;
+  padding: 10px;
 }
 
 .feature-title {
@@ -83,6 +103,7 @@
 }
 
 .feature-text {
+  display: flex;
   font-size: 0.95rem;
   color: #555;
 }
@@ -153,15 +174,15 @@
 
 
 #effect-title {
-  display: inline-block; /* obligatoire pour l'animation */
-  animation: spacingAnim 1.5s ease-in-out infinite alternate;
+  display: inline-block;
+  animation: spacingAnim 0.5s ease-in-out infinite alternate;
 }
 
 @keyframes spacingAnim {
   from {
-    letter-spacing: 0px;
+    opacity: 0.6;
   }
   to {
-    letter-spacing: 6px;
+    opacity: 1;
   }
 }

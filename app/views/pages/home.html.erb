@@ -1,27 +1,42 @@
 <div class="bg-blanc p-3">
   <div class="hero" style="background-image: url('<%= image_path("backgroundHome.png") %>'); background-size: cover;">
-    <h1 class="hero-title"><span id="effect-title">FOKUS</span> VERS VOTRE OBJECTIF</h1>
+    <h1 class="hero-title"><span id="effect-title">FOKUS</span><br> VERS VOTRE OBJECTIF</h1>
   </div>
 
   <div class="feature-card shadow">
-    <p class="feature-title">Votre projet</p>
-    <p class="feature-text">
-      Décrivez votre idée en quelques mots, l'IA crée votre plan d'action personnalisé.
-    </p>
+    <div class="left-part" style="background-image: url('<%= image_path("backgroundFeature.png") %>'); background-size: cover;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 2q.563 0 1.11.061a1 1 0 0 1-.22 1.988a8 8 0 1 0 7.061 7.061a1 1 0 1 1 1.988-.22q.06.547.061 1.11c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m-.032 5.877a1 1 0 0 1-.719 1.217A3.002 3.002 0 0 0 12 15a3 3 0 0 0 2.906-2.25a1 1 0 0 1 1.936.5A5.002 5.002 0 0 1 7 12a5 5 0 0 1 3.75-4.842a1 1 0 0 1 1.218.719m6.536-5.75a1 1 0 0 1 .617.923v1.83h1.829a1 1 0 0 1 .707 1.707L18.12 10.12a1 1 0 0 1-.707.293H15l-1.828 1.829a1 1 0 0 1-1.415-1.415L13.586 9V6.586a1 1 0 0 1 .293-.707l3.535-3.536a1 1 0 0 1 1.09-.217m-1.383 3.337L15.586 7v1.414H17l1.536-1.535h-.415a1 1 0 0 1-1-1z"/></g></svg>
+    </div>
+    <div class="right-part">
+      <p class="feature-title">Votre projet</p>
+      <p class="feature-text">
+        Décrivez votre idée en quelques mots, l'IA crée votre plan d'action personnalisé.
+      </p>
+    </div>
   </div>
 
   <div class="feature-card shadow">
-    <p class="feature-title">Passer à l'action</p>
-    <p class="feature-text">
-      Chaque jour, recevez votre To Do du jour pour avancer concrètement vers vos objectifs.
-    </p>
+    <div class="left-part" style="background-image: url('<%= image_path("backgroundFeature.png") %>'); background-size: cover;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#fbf4f4" d="M16.5 5.5a2 2 0 0 0 2-2a2 2 0 0 0-2-2a2 2 0 0 0-2 2a2 2 0 0 0 2 2m-3.6 13.9l1-4.4l2.1 2v6h2v-7.5l-2.1-2l.6-3A7.3 7.3 0 0 0 22 13v-2c-1.76.03-3.4-.89-4.3-2.4l-1-1.6c-.36-.6-1-1-1.7-1c-.3 0-.5.1-.8.1L9 8.3V13h2V9.6l1.8-.7l-1.6 8.1l-4.9-1l-.4 2zM4 9a1 1 0 0 1-1-1a1 1 0 0 1 1-1h3v2zm1-4a1 1 0 0 1-1-1a1 1 0 0 1 1-1h5v2zm-2 8a1 1 0 0 1-1-1a1 1 0 0 1 1-1h4v2z"/></svg>
+    </div>
+    <div class="right-part">
+      <p class="feature-title">Passer à l'action</p>
+      <p class="feature-text">
+        Chaque jour, recevez votre To Do du jour pour avancer concrètement vers vos objectifs.
+      </p>
+    </div>
   </div>
 
   <div class="feature-card shadow" id="last-feature-card">
-    <p class="feature-title">Suivi de progression</p>
-    <p class="feature-text">
-      Visualisez votre évolution et mesurez vos progrès en temps réel.
-    </p>
+    <div class="left-part" style="background-image: url('<%= image_path("backgroundFeature.png") %>'); background-size: cover;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M14 3a2 2 0 0 1 2 2v3h4a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h4V5a2 2 0 0 1 2-2zm0 2h-4v14h4zm6 5h-4v9h4zM8 13H4v6h4z"/></g></svg>
+    </div>
+    <div class="right-part">
+      <p class="feature-title">Suivi de progression</p>
+      <p class="feature-text">
+        Visualisez votre évolution et mesurez vos progrès en temps réel.
+      </p>
+    </div>
   </div>
 
 
