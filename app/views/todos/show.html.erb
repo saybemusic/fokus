@@ -48,9 +48,24 @@
             class: "bouton" %>
       <% end %>
     <% end %>
+
+    <% @todo.tasks.each do |task|%>
+      <% if task.priority == 1 %>
+        <% if task.completed = true %>
+          <a href="#" class="bouton w-100 my-2" id="fokus-btn">FOKUS</a>
+          <script>
+          document.addEventListener("DOMContentLoaded", () => {
+          const fokusBtn = document.getElementById("fokus-btn");
+          fokusBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            fokusBtn.style.setProperty('display', 'none')
+            });
+          });
+          </script>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
-  <div class="bouton mb-3">
-   <%= link_to "FOKUS NOW", class: "bouton" %>
-  </div>
+
 
 </div>
