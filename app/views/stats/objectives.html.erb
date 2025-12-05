@@ -19,12 +19,7 @@
         </div>
 
         <div class="stats-large-card-body">
-          <canvas
-            width="900"
-            height="180"
-            data-controller="heatmap"
-            data-heatmap-data-value="<%= @heatmaps[objective.id].to_json %>">
-          </canvas>
+          <%= heatmap_canvas_for(objective) %>
         </div>
 
       </div>
