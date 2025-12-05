@@ -1,11 +1,12 @@
 .fokus-progress-container {
   width: 100%;
-  height: 28px;
-  background: rgba(255,255,255,0.08);
+  height: 36px;
+  background: $blanc;
   border-radius: 20px;
   padding: 3px;
-  border: 1px solid rgba(255, 79, 165, 0.4);
+  border: 1px solid $vertc;
   overflow: hidden;
+  margin-bottom: 16px;
 }
 
 .fokus-progress-bar {
@@ -13,7 +14,7 @@
   height: 100%;
   width: 0%;
   border-radius: 20px;
-  background: rgba(255, 79, 165, 0.25);
+  background: $vertf;
   transition: width 0.8s ease-out;
   overflow: hidden;
 
@@ -25,7 +26,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-shadow: 0 0 4px rgba(255, 79, 165, 0.4);
-  color: #00000044;
+  color: $blanc;
   font-size: 13px;
   font-weight: 700;
   z-index: 20;
@@ -43,7 +44,7 @@
   position: absolute;
   width: 2px;      /* ← avant : 3px */
   height: 2px;     /* ← avant : 3px */
-  background: #ff4fa5;
+  background: $vertc;
   border-radius: 50%;
   opacity: 0.9;
   animation: particleChaos var(--duration) infinite ease-in-out;
