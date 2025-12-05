@@ -4,7 +4,7 @@
   background: $blanc;
   border-radius: 20px;
   padding: 3px;
-  border: 1px solid $vertc;
+  border: 1px solid rgba(0, 0, 0, 0.162);
   overflow: hidden;
   margin-bottom: 16px;
 }
@@ -14,10 +14,19 @@
   height: 100%;
   width: 0%;
   border-radius: 20px;
-  background: $vertf;
+  background: linear-gradient(to right, red 0%, orange 99%);
   transition: width 0.8s ease-out;
   overflow: hidden;
 
+  &.complete {
+    background: linear-gradient(135deg, #37d27a, #2bb266) !important;
+
+    .fokus-progress-points { // enfant direct
+      animation: none !important;  // stop l'animation
+      opacity: 0 !important;        // fait disparaître les points
+      transition: opacity 0.5s ease; // disparition douce
+    }
+  }
 }
 
 .fokus-progress-text {
@@ -25,8 +34,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-shadow: 0 0 4px rgba(255, 79, 165, 0.4);
-  color: $blanc;
+  color: $noir;
   font-size: 13px;
   font-weight: 700;
   z-index: 20;
@@ -38,20 +46,20 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
+
+  .fokus-point {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: orange;
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: particleChaos var(--duration) infinite ease-in-out;
+    transition: opacity 0.5s ease; // disparition douce
+  }
 }
 
-.fokus-point {
-  position: absolute;
-  width: 2px;      /* ← avant : 3px */
-  height: 2px;     /* ← avant : 3px */
-  background: $vertc;
-  border-radius: 50%;
-  opacity: 0.9;
-  animation: particleChaos var(--duration) infinite ease-in-out;
-}
-
-
-/* Nouvelle animation chaotique */
+/* Animation chaotique des points */
 @keyframes particleChaos {
   0%   { transform: translate(0, 0); }
   20%  { transform: translate(var(--dx1), var(--dy1)); }

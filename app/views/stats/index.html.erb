@@ -184,20 +184,7 @@
 
     </div>
 
-    <!-- HEATMAP -->
-    <div class="stats-large-card">
-      <div class="stats-card-title stats-large-card-title" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
-        Historique d’activité
-      </div>
-      <div class="stats-large-card-body">
-        <canvas
-          width="900"
-          height="180"
-          data-controller="heatmap"
-          data-heatmap-data-value="<%= @days_visited.to_json %>"
-        ></canvas>
-      </div>
-    </div>
+
       <%= link_to "Statistiques de tous mes objectifs", stats_objectives_path %>
   </div>
 </div>

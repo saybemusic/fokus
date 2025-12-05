@@ -10,6 +10,11 @@ export default class extends Controller {
     // Mise à jour largeur
     bar.style.width = `${this.percentValue}%`
 
+        if (this.percentValue >= 100) {
+          bar.classList.add('complete');  // déclenche le CSS pour cacher les points
+        } else {
+          bar.classList.remove('complete'); // réactive les points si <100%
+        }
     // Génération de points
     this.generatePoints(container, Math.floor(20 + this.percentValue * 1.5))
   }
