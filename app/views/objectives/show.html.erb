@@ -1,14 +1,12 @@
 <div class="programmes-page fk-container">
 
-  <div class="fk-bg"></div>
-
-    <div class="fk-header">
-      <h1 class="fk-title"><%= @objective.goal %></h1>
-      <p class="fk-subtitle"><%= @objective.resume %></p>
-      <p class="fk-subtitle">
+    <div class="fk-header" >
+      <h1 class="programmes-fk-title"><%= @objective.goal %></h1>
+      <p class="programmes-fk-subtitle"><%= @objective.resume %></p>
+      <p class="programmes-fk-subtitle">
         <strong>Durée totale :</strong> <%= @objective.time_due %> jours
       </p>
-      <p class="fk-subtitle">
+      <p class="programmes-fk-subtitle">
         <strong>Temps quotidien disponible :</strong>
         <%= @objective.time_global %> minutes
       </p>
@@ -27,23 +25,28 @@
 
     <hr>
 
-    <h2 class="fk-subtitle">Programme détaillé</h2>
+    <h2 class="programmes-fk-subtitle">Programme détaillé</h2>
 
     <div class="programmes-main-card">
     <div class="programmes-cards-scroll">
       <% if @objective.todos.any? %>
         <% @objective.todos.order(:due_date).each do |todo| %>
 
-          <div class="programmes-carte">
+        <div class="programmes-carte"
+            data-completed="<%= todo.completed %>">
             <div class="programmes-carte-header"
                  style="background-image: url('<%= image_path("backgroundHome.png") %>');
                         background-size: cover;">
-              Jour <%= todo.to_ordered_day() %> : <%= todo.title %>
+                    <%= todo.completed ?
+                    "Jour #{todo.to_ordered_day} : Terminé ✔" :
+                    "Jour #{todo.to_ordered_day} : #{todo.title}" %>
+
             </div>
 
-            <div class="programmes-carte-body">
-              <p><%= todo.description %></p>
-            </div>
+          <div class="programmes-carte-body">
+            <p><%= todo.completed ? todo.title : todo.description %></p>
+          </div>
+
           </div>
         <% end %>
         <% else %>
