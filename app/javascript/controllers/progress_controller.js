@@ -10,13 +10,11 @@ export default class extends Controller {
     // Mise à jour largeur
     bar.style.width = `${this.percentValue}%`
 
-      if (this.percentValue >= 100) {
-      bar.style.background = "linear-gradient(135deg, #37d27a, #2bb266)";
-      pointsContainer.classList.add('hidden'); // ← on cache les points
-    } else {
-      bar.style.background = "linear-gradient(to right, red 0%, orange 99%)";
-      pointsContainer.classList.remove('hidden'); // ← on ré-affiche les points
-    }
+        if (this.percentValue >= 100) {
+          bar.classList.add('complete');  // déclenche le CSS pour cacher les points
+        } else {
+          bar.classList.remove('complete'); // réactive les points si <100%
+        }
     // Génération de points
     this.generatePoints(container, Math.floor(20 + this.percentValue * 1.5))
   }

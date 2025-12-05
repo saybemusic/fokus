@@ -1,51 +1,62 @@
-<div class="fk-page">
+<div class="programmes-page fk-container">
 
-<div class="d-flex flex-column align-items-center justify-content-center">
+  <div class="fk-header">
+    <h1 class="programmes-fk-title"><%= @todo.title %></h1>
+    <p class="programmes-fk-subtitle"><strong>Jour :</strong> <%= @todo.to_ordered_day() %></p>
+  </div>
 
-  <div class="task-card">
-      <h1> <%= @todo.title %></h1>
-      <p><strong>Jour</strong> <%= @todo.to_ordered_day() %></p>
-    <ul>
+  <h2 class="programmes-fk-subtitle">Tâches du jour</h2>
+
+  <div class="programmes-main-card">
+    <div class="programmes-cards-scroll">
       <% @todo.tasks.each do |task| %>
-        <% if task.completed  %>
-          <div class = "faite">
-
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/><path stroke-linecap="round" d="m16 24l6 6l12-12"/></g></svg>
+        <% if task.completed %>
+          <div class="programmes-carte" data-completed="true">
+            <div class="programmes-carte-header done">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4">
+                  <path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/>
+                  <path stroke-linecap="round" d="m16 24l6 6l12-12"/>
+                </g>
+              </svg>
               <p><%= task.title %></p>
             </div>
-
+          </div>
         <% else %>
-          <div class = "tache a-faire">
-            <div class="task-header blanc">
+          <div class="programmes-carte" data-completed="false">
+            <div class="programmes-carte-header pending">
               <%= link_to task_path(@objective, task: task), data: { turbo_method: :patch }, class: "blanc" do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                  <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4">
+                    <path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/>
+                  </g>
+                </svg>
               <% end %>
-              <p> <%= task.title %> </p>
+              <p><%= task.title %></p>
             </div>
-            <div class="p-1">
+            <div class="programmes-carte-body">
               <details>
                 <summary>Comment faire ?</summary>
-                <p class="p-2"><%= task.ressource_ia %></p>
+                <p><%= task.ressource_ia %></p>
               </details>
             </div>
-
           </div>
         <% end %>
       <% end %>
-    </ul>
+    </div>
 
-    <% if @objective_completed == true %>
-      <% if @todo_just_completed == true %>
-        <p>Bravo vous avez atteint votre objectif</p>
-        <%= link_to "VOIR MES OBJECTIFS",
-            objectives_path(@objective),
-            class: "bouton" %>
+    <div class="btn-back">
+      <%= link_to "Retour aux objectifs", objectives_path, class: "bouton" %>
+    </div>
+
+    <% if @objective_completed %>
+      <% if @todo_just_completed %>
+        <p>Bravo, vous avez atteint votre objectif !</p>
+        <%= link_to "VOIR MES OBJECTIFS", objectives_path(@objective), class: "bouton" %>
       <% end %>
     <% else %>
-      <% if @todo_just_completed == true %>
-        <%= link_to "Passer au jour suivant",
-            next_day_path(@objective),
-            class: "bouton" %>
+      <% if @todo_just_completed %>
+        <%= link_to "Passer au jour suivant", next_day_path(@objective), class: "bouton" %>
       <% end %>
     <% end %>
 
@@ -54,8 +65,6 @@
         <a href="#" class="bouton w-100 my-2 fokus-btn" data-bs-toggle="modal" data-bs-target="#fokusModal" data-task-name="<%= task.title %>">FOKUS</a>
       <% end %>
     <% end %>
-
- <%# Modal FOKUS %>
     <div class="modal fade" id="fokusModal" tabindex="-1" aria-labelledby="fokusModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -74,7 +83,9 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
-</div>
+
+ <%# Modal FOKUS %>
