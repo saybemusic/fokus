@@ -76,6 +76,22 @@ class StatsController < ApplicationController
       total_tasks > 0 ? ((done_tasks.to_f / total_tasks) * 100).round : 0
     end
 
+    # --- PROGRESSION PAR OBJECTIF (pour affichage dans index des objectifs) ---
+    @objective_progress = {}
+
+      @objectives.each do |o|
+        total_tasks = o.todos.sum { |td| td.tasks.count }
+        done_tasks  = o.todos.sum { |td| td.tasks.where(completed: true).count }
+
+      percent = total_tasks > 0 ? ((done_tasks.to_f / total_tasks) * 100).round : 0
+
+        @objective_progress[o.id] = {
+          total: total_tasks,
+          done: done_tasks,
+          percent: percent
+          }
+    end
+
     @avg_progression = @progressions.count > 0 ? (@progressions.sum / @progressions.count).round : 0
 
     # --- OBJECTIF LE PLUS RAPIDE & LE PLUS LENT (seulement ceux complétés) ---

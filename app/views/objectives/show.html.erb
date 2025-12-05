@@ -13,6 +13,18 @@
         <%= @objective.time_global %> minutes
       </p>
     </div>
+
+      <% progress = objective_progress(@objective) %>
+          <div class="fokus-progress-container"
+              data-controller="progress"
+              data-progress-percent-value="<%= progress[:percent] %>">
+              <span class="fokus-progress-text"><%= progress[:percent] %>%</span>
+            <div class="fokus-progress-bar">
+
+              <div class="fokus-progress-points"></div>
+            </div>
+          </div>
+
     <hr>
 
     <h2 class="fk-subtitle">Programme détaillé</h2>
