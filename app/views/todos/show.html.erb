@@ -51,22 +51,32 @@
       <% end %>
     <% end %>
 
-    <% @todo.tasks.each do |task|%>
-      <% if task.priority == 1 %>
-        <% if task.completed = true %>
-          <a href="#" class="bouton w-100 my-2" id="fokus-btn">FOKUS</a>
-          <script>
-          document.addEventListener("DOMContentLoaded", () => {
-          const fokusBtn = document.getElementById("fokus-btn");
-          fokusBtn.addEventListener("click", (event) => {
-            event.preventDefault();
-            fokusBtn.style.setProperty('display', 'none')
-            });
-          });
-          </script>
-        <% end %>
+    <% @todo.tasks.each do |task| %>
+      <% if task.priority == 1 && !task.completed %>
+        <a href="#" class="bouton w-100 my-2 fokus-btn" data-bs-toggle="modal" data-bs-target="#fokusModal" data-task-name="<%= task.title %>">FOKUS</a>
       <% end %>
     <% end %>
+
+ <%# Modal FOKUS %>
+  <div class="modal fade" id="fokusModal" tabindex="-1" aria-labelledby="fokusModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="fokusModalLabel">Mode FOKUS - <span id="taskName"></span></h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <div id="timer" class="h2 mb-3 fw-bold text-primary">25:00</div>
+          <p class="mb-4">Session de travail concentré</p>
+          <div class="d-flex justify-content-center gap-2 mb-3">
+            <button type="button" class="btn btn-success" id="startBtn">Démarrer</button>
+            <button type="button" class="btn btn-secondary" id="pauseBtn" style="display: none;">Pause</button>
+            <button type="button" class="btn btn-danger" id="stopBtn">Stop</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 
 
