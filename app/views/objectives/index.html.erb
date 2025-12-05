@@ -21,6 +21,10 @@
               </div>
             <% end %>
 
+            <div class="programmes-carte-heatmap">
+              <%= heatmap_canvas_for(objective) %>
+            </div>
+
             <div class="programme-footer">
               <%= link_to objective_path(objective),
                   data: { turbo_method: :delete, turbo_confirm: "Supprimer ?" },

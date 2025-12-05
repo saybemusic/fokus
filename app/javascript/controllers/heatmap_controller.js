@@ -13,33 +13,32 @@ export default class extends Controller {
 
     const data = this.dataValue || []
 
-    const cellSize = 18
-    const padding = 4
-    const maxColumns = 7
+    const cellSize = 15
+    const padding = 3
+    const columns = 15
 
-    let column = 0
-    let row = 0
-
-    // Couleurs conformes à ta logique
     const colors = {
-      0: "#d7d7d7ff", // blanc (futur ou jour actuel sans progression)
-      1: "#ff4f4f", // rouge (aucune tâche faite, jour passé)
-      2: "#ffa534", // orange (partiellement fait)
-      3: "#34c759"  // vert (toutes tâches faites)
+      0: "#d3d3d3", // gris futur
+      1: "#ff4f4f", // rouge
+      2: "#ff9f1c", // orange
+      3: "#34c759"  // vert
     }
+
+    let col = 0
+    let row = 0
 
     data.forEach(intensity => {
       ctx.fillStyle = colors[intensity] || "#ffffff"
 
-      const x = column * (cellSize + padding)
+      const x = col * (cellSize + padding)
       const y = row * (cellSize + padding)
 
       ctx.fillRect(x, y, cellSize, cellSize)
 
-      column++
+      col++
 
-      if (column >= maxColumns) {
-        column = 0
+      if (col >= columns) {
+        col = 0
         row++
       }
     })
