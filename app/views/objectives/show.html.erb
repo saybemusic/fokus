@@ -1,15 +1,4 @@
 <div class="programmes-page fk-container">
-  <div class="fk-header">
-    <h1 class="programmes-fk-title"><%= @objective.goal %></h1>
-    <p class="programmes-fk-subtitle"><%= @objective.resume %></p>
-    <p class="programmes-fk-subtitle">
-      <strong>Durée totale :</strong> <%= @objective.time_due %> jours
-    </p>
-    <p class="programmes-fk-subtitle">
-      <strong>Temps quotidien disponible :</strong>
-      <%= @objective.time_global %> minutes
-    </p>
-  </div>
 
     <div class="fk-header" >
       <h1 class="programmes-fk-title"><%= @objective.goal %></h1>
@@ -22,7 +11,6 @@
         <%= @objective.time_global %> minutes
       </p>
     </div>
-  </div>
 
       <% progress = objective_progress(@objective) %>
           <div class="fokus-progress-container"
@@ -37,7 +25,6 @@
 
     <h2 class="programmes-fk-subtitle">Programme détaillé</h2>
 
-  <%= turbo_frame_tag dom_id(@objective, :todos) do %>
     <div class="programmes-main-card">
     <div class="programmes-cards-scroll">
       <% if @objective.todos.any? %>
@@ -61,21 +48,19 @@
           </div>
         <% end %>
         <% else %>
-          <div class="fokus-loader">
-            <div class="fokus-loader-ring"></div>
-            <div class="fokus-loader-core"></div>
-            <p class="loader-text">Génération de ton programme...</p>
-          </div>
+          <p>Aucun programme généré pour cet objectif.</p>
         <% end %>
-      </div>
-
       <div class="btn-back">
         <%= link_to "Retour aux objectifs", objectives_path, class: "bouton" %>
       </div>
-    </div>
-  <% end %>
+      </div>
+      </div>
 
-  <div class="btn-FOKUS">
-    <%= link_to "COMMENCER", todo_path(@objective), class: "bouton" %>
-  </div>
-</div>
+
+      <div class="btn-FOKUS">
+        <%= link_to "COMMENCER", todo_path(@objective), class: "bouton" %>
+      </div> <!-- objective-details -->
+
+  </div> <!-- fk-container -->
+
+</div> <!-- fk-page -->
