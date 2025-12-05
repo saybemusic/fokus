@@ -1,5 +1,5 @@
 let timerInterval;
-let timeLeft = 25 * 60;
+let timeLeft = 15 * 60;
 let isRunning = false;
 
 function initFokusModal() {
@@ -29,7 +29,7 @@ function initFokusModal() {
   function resetTimer() {
     if (timerInterval) clearInterval(timerInterval);
     isRunning = false;
-    timeLeft = 25 * 60;
+    timeLeft = 15 * 60;
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
     timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
