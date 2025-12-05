@@ -130,7 +130,7 @@
       }
 
       &[data-completed="false"] .programmes-carte-header {
-        color: #fff;
+         background: linear-gradient(to right, red 0%, orange 99%) !important;
       }
     }
   }
