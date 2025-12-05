@@ -4,7 +4,7 @@
   background: $blanc;
   border-radius: 20px;
   padding: 3px;
-  border: 1px solid $vertc;
+  border: 1px solid rgba(0, 0, 0, 0.162);
   overflow: hidden;
   margin-bottom: 16px;
 }
@@ -14,10 +14,14 @@
   height: 100%;
   width: 0%;
   border-radius: 20px;
-  background: $vertf;
+  background: linear-gradient(to right, red 0%, orange 99%);
   transition: width 0.8s ease-out;
   overflow: hidden;
 
+}
+
+.fokus-progress-bar.complete {
+  background: linear-gradient(135deg, #37d27a, #2bb266) !important;
 }
 
 .fokus-progress-text {
@@ -25,8 +29,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-shadow: 0 0 4px rgba(255, 79, 165, 0.4);
-  color: $blanc;
+  color: $noir;
   font-size: 13px;
   font-weight: 700;
   z-index: 20;
@@ -44,10 +47,14 @@
   position: absolute;
   width: 2px;      /* ← avant : 3px */
   height: 2px;     /* ← avant : 3px */
-  background: $vertc;
+  background: orange;
   border-radius: 50%;
   opacity: 0.9;
   animation: particleChaos var(--duration) infinite ease-in-out;
+}
+
+.fokus-progress-points.hidden {
+  display: none; /* ou opacity: 0; pointer-events: none; */
 }
 
 
