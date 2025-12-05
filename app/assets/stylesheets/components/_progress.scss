@@ -18,10 +18,15 @@
   transition: width 0.8s ease-out;
   overflow: hidden;
 
-}
+  &.complete {
+    background: linear-gradient(135deg, #37d27a, #2bb266) !important;
 
-.fokus-progress-bar.complete {
-  background: linear-gradient(135deg, #37d27a, #2bb266) !important;
+    .fokus-progress-points { // enfant direct
+      animation: none !important;  // stop l'animation
+      opacity: 0 !important;        // fait disparaître les points
+      transition: opacity 0.5s ease; // disparition douce
+    }
+  }
 }
 
 .fokus-progress-text {
@@ -41,24 +46,20 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
+
+  .fokus-point {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: orange;
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: particleChaos var(--duration) infinite ease-in-out;
+    transition: opacity 0.5s ease; // disparition douce
+  }
 }
 
-.fokus-point {
-  position: absolute;
-  width: 2px;      /* ← avant : 3px */
-  height: 2px;     /* ← avant : 3px */
-  background: orange;
-  border-radius: 50%;
-  opacity: 0.9;
-  animation: particleChaos var(--duration) infinite ease-in-out;
-}
-
-.fokus-progress-points.hidden {
-  display: none; /* ou opacity: 0; pointer-events: none; */
-}
-
-
-/* Nouvelle animation chaotique */
+/* Animation chaotique des points */
 @keyframes particleChaos {
   0%   { transform: translate(0, 0); }
   20%  { transform: translate(var(--dx1), var(--dy1)); }
