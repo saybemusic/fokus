@@ -11,39 +11,55 @@
     </p>
   </div>
 
-  <% progress = objective_progress(@objective) %>
-  <div class="fokus-progress-container"
-       data-controller="progress"
-       data-progress-percent-value="<%= progress[:percent] %>">
-    <span class="fokus-progress-text"><%= progress[:percent] %>%</span>
-    <div class="fokus-progress-bar">
-      <div class="fokus-progress-points"></div>
+    <div class="fk-header" >
+      <h1 class="programmes-fk-title"><%= @objective.goal %></h1>
+      <p class="programmes-fk-subtitle"><%= @objective.resume %></p>
+      <p class="programmes-fk-subtitle">
+        <strong>Durée totale :</strong> <%= @objective.time_due %> jours
+      </p>
+      <p class="programmes-fk-subtitle">
+        <strong>Temps quotidien disponible :</strong>
+        <%= @objective.time_global %> minutes
+      </p>
     </div>
   </div>
 
-  <h2 class="programmes-fk-subtitle">Programme détaillé</h2>
+      <% progress = objective_progress(@objective) %>
+          <div class="fokus-progress-container"
+              data-controller="progress"
+              data-progress-percent-value="<%= progress[:percent] %>">
+              <span class="fokus-progress-text"><%= progress[:percent] %>%</span>
+            <div class="fokus-progress-bar">
 
-  <%= turbo_stream_from @objective %>
+              <div class="fokus-progress-points"></div>
+            </div>
+          </div>
+
+    <h2 class="programmes-fk-subtitle">Programme détaillé</h2>
 
   <%= turbo_frame_tag dom_id(@objective, :todos) do %>
     <div class="programmes-main-card">
-      <div class="programmes-cards-scroll">
-        <% if @objective.todos.any? %>
-          <% @objective.todos.order(:due_date).each do |todo| %>
-            <div class="programmes-carte"
-                 data-completed="<%= todo.completed %>">
-              <div class="programmes-carte-header"
-                   style="background-image: url('<%= image_path("backgroundHome.png") %>');
-                          background-size: cover;">
-                <%= todo.completed ?
-                  "Jour #{todo.to_ordered_day} : Terminé :coche_trait_plein:" :
-                  "Jour #{todo.to_ordered_day} : #{todo.title}" %>
-              </div>
-              <div class="programmes-carte-body">
-                <p><%= todo.completed ? todo.title : todo.description %></p>
-              </div>
+    <div class="programmes-cards-scroll">
+      <% if @objective.todos.any? %>
+        <% @objective.todos.order(:due_date).each do |todo| %>
+
+        <div class="programmes-carte"
+            data-completed="<%= todo.completed %>">
+            <div class="programmes-carte-header"
+                 style="background-image: url('<%= image_path("backgroundHome.png") %>');
+                        background-size: cover;">
+                    <%= todo.completed ?
+                    "Jour #{todo.to_ordered_day} : Terminé ✔" :
+                    "Jour #{todo.to_ordered_day} : #{todo.title}" %>
+
             </div>
-          <% end %>
+
+          <div class="programmes-carte-body">
+            <p><%= todo.completed ? todo.title : todo.description %></p>
+          </div>
+
+          </div>
+        <% end %>
         <% else %>
           <div class="fokus-loader">
             <div class="fokus-loader-ring"></div>
