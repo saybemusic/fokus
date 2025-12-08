@@ -1,5 +1,9 @@
 <div class="programmes-page fk-container">
 
+  <div class="back-arrow" data-controller="back-arrow">
+    <%= link_to "←", objectives_path, class: "back-link" %>
+  </div>
+
   <div class="fk-header">
     <h1 class="programmes-fk-title"><%= @todo.title %></h1>
     <p class="programmes-fk-subtitle"><strong>Jour :</strong> <%= @todo.to_ordered_day() %></p>
@@ -45,9 +49,7 @@
       <% end %>
     </div>
 
-    <div class="btn-back">
-      <%= link_to "Retour aux objectifs", objectives_path, class: "bouton" %>
-    </div>
+
 
     <% if @objective_completed %>
       <% if @todo_just_completed %>
@@ -62,30 +64,65 @@
 
     <% @todo.tasks.each do |task| %>
       <% if task.priority == 1 && !task.completed %>
-        <a href="#" class="bouton w-100 my-2 fokus-btn" data-bs-toggle="modal" data-bs-target="#fokusModal" data-task-name="<%= task.title %>">FOKUS</a>
+        <a href="#" class="bouton w-100 my-2 fokus-btn"
+          data-bs-toggle="modal"
+          data-bs-target="#fokusModal"
+          data-task-name="<%= task.title %>">
+          FOKUS
+        </a>
       <% end %>
     <% end %>
   </div>
 </div>
 
- <%# Modal FOKUS %>
-    <div class="modal fade" id="fokusModal" tabindex="-1" aria-labelledby="fokusModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-center">
-            <div id="timer" class="mb-3">15:00</div>
-              <h5 id="fokusModalLabel" data-fokus-target="taskName">
-                <span id="taskName"></span>
-              </h5>
-            <div class="d-flex justify-content-center gap-2 mb-3">
-              <button type="button" class="bouton" id="startBtn">Démarrer</button>
-              <button type="button" class="bouton" id="pauseBtn" style="display: none;">Pause</button>
-              <button type="button" class="bouton" id="stopBtn">Stop</button>
-            </div>
-          </div>
+<div class="modal fade"
+     id="fokusModal"
+     tabindex="-1"
+     data-bs-backdrop="static"
+     data-bs-keyboard="false"
+     data-controller="fokus">
+
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body text-center">
+        <div id="timer"
+             class="mb-3"
+             data-fokus-target="timerDisplay">
+          15:00
+        </div>
+
+        <h5 id="fokusModalLabel">
+          <span id="taskName" data-fokus-target="taskName"></span>
+        </h5>
+
+        <div class="d-flex justify-content-center gap-2 mb-3">
+          <a type="button"
+                  class="bouton"
+                  data-fokus-target="startButton"
+                  data-action="click->fokus#start">
+            Démarrer
+          </a>
+
+          <a type="button"
+                  class="bouton"
+                  style="display: none;"
+                  data-fokus-target="pauseButton"
+                  data-action="click->fokus#pause">
+            Pause
+          </a>
+
+          <a type="button"
+                  class="bouton"
+                  data-fokus-target="stopButton"
+                  data-action="click->fokus#stop">
+            Stop
+          </a>
         </div>
       </div>
     </div>
+  </div>
+</div>

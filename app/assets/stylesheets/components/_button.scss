@@ -9,3 +9,16 @@
   letter-spacing: 1.5px;
   text-align: center;
 }
+
+.fokus-btn {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom, 10px) + 40px);
+  width: 90%;
+  max-width: 320px;
+  margin: 40px auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
