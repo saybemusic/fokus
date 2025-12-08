@@ -13,3 +13,75 @@
 .navbar h1 {
   display: inline;
 }
+
+.game {
+  position: absolute;
+  top: -300px;
+  right: 5px;
+  width: 300px;
+  transition: transform 0.45s ease;
+}
+
+/* État ouvert (toggle ON) */
+.game.is-active {
+  transform: translateY(300px);
+}
+
+.gameBox {
+  width: 100%;
+  height: 300px;
+  border-radius: 0 0 0 15px;
+  position: relative;
+  transition: box-shadow 0.45s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $blanc;
+}
+
+.gameBox {
+  img {
+    width: 150px;
+    height: auto;
+  }
+}
+
+/* Ombre uniquement quand c'est ouvert */
+.game.is-active .gameBox {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Trophée */
+.trophee {
+  position: absolute;
+  bottom: -34px;
+  right: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 0 0 15px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trophee svg {
+  width: 14px;
+  height: auto;
+  animation: float 3s ease-in-out infinite;
+  pointer-events: none;
+  transition: transform 0.25s ease;
+}
+
+/* Flip vertical quand c'est ouvert */
+.game.is-active .trophee svg {
+  animation: none;
+  transform: scaleY(-1); /* flip vertical */
+}
+
+/* Animation de flottement */
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
