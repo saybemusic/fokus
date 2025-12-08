@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :tasks, only: [:index, :update] do
     member do
       patch :uncomplete
+      patch :complete
     end
   end
 
