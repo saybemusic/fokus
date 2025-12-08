@@ -17,9 +17,22 @@ export default class extends Controller {
 
   openModal(event) {
     const triggerButton = event.relatedTarget
-    if (triggerButton && triggerButton.dataset.taskName) {
-      this.taskNameTarget.textContent = triggerButton.dataset.taskName
+
+    if (triggerButton) {
+      const name = triggerButton.dataset.taskName
+      const duration = triggerButton.dataset.taskDuration
+
+      if (name) {
+        this.taskNameTarget.textContent = name
+      }
+
+      if (duration) {
+        this.initialTimeValue = parseInt(duration, 10) || this.initialTimeValue
+      }
     }
+
+    this.resetTimer()
+    this.updateButtons()
   }
 
   start() {
@@ -79,4 +92,34 @@ export default class extends Controller {
       clearInterval(this.timerId)
     }
   }
+
+  // horloge
+  static targets = [ "timerDisplay", "taskName", "startButton", "pauseButton", "stopButton", "progressRing", "timerContainer" ]
+
+  updateDisplay() {
+    const minutes = Math.floor(this.timeLeft / 60)
+    const seconds = this.timeLeft % 60
+    this.timerDisplayTarget.textContent =
+      `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+
+    // Animation anneau analogique (0% = 534, 100% = 0)
+    const circumference = 534 // 2 * π * 85
+    const offset = (this.timeLeft / this.initialTimeValue) * circumference
+    this.progressRingTarget.style.strokeDashoffset = offset
+  }
+
+  stop() {
+    this.isRunning = false
+    clearInterval(this.timerId)
+    this.resetTimer()
+    this.updateButtons()
+    this.timerContainerTarget.classList.remove("text-danger")
+  }
+
+  resetTimer() {
+    this.timeLeft = this.initialTimeValue
+    this.progressRingTarget.style.strokeDashoffset = "534" // Reset anneau
+    this.updateDisplay()
+  }
+
 }

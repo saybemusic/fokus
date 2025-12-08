@@ -91,15 +91,37 @@
       </div>
 
       <div class="modal-body text-center">
-        <div id="timer"
-             class="mb-3"
-             data-fokus-target="timerDisplay">
-          15:00
-        </div>
-
         <h5 id="fokusModalLabel">
           <span id="taskName" data-fokus-target="taskName"></span>
         </h5>
+
+        <div class="timer-container" data-fokus-target="timerContainer">
+          <%# <div id="timer" class="digital-timer" data-fokus-target="timerDisplay"> %>
+            <%# 15:00 %>
+          <%# </div> %>
+          <svg class="analog-timer" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="85" fill="none" stroke="#e0e0e0" stroke-width="8"/>
+            <circle cx="100" cy="100" r="85" fill="none" stroke="#003901" stroke-width="8"
+                    stroke-linecap="round" stroke-dasharray="534" stroke-dashoffset="534"
+                    data-fokus-target="progressRing"
+                    style="transform: rotate(-90deg); transform-origin: 50% 50%;"/>
+            <g class="clock-marks">
+              <% (0..11).each do |i| %>
+                <line x1="100" y1="20" x2="100" y2="35"
+                      stroke="#999" stroke-width="3"
+                      transform="rotate(<%= i * 30 %>, 100, 100)"
+                      stroke-linecap="round"/>
+              <% end %>
+            </g>
+            <!-- Cercle central remplacé par un conteneur <foreignObject> pour le timer numérique -->
+            <foreignObject x="60" y="60" width="80" height="80">
+              <div xmlns="http://www.w3.org/1999/xhtml" class="timer-center">
+                <div id="timer" data-fokus-target="timerDisplay">
+                </div>
+              </div>
+            </foreignObject>
+          </svg>
+        </div>
 
         <div class="d-flex justify-content-center gap-2 mb-3">
           <a type="button"
