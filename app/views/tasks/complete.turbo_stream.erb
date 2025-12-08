@@ -1,0 +1,42 @@
+<%= turbo_stream.replace(dom_id(@task)) do %>
+  <%= link_to uncomplete_task_path(@task), data: { turbo_method: :patch, turbo: true }, id: dom_id(@task) do %>
+    <div  class="programmes-carte" data-completed="true">
+      <div class="programmes-carte-header done">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+          <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4">
+            <path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/>
+            <path stroke-linecap="round" d="m16 24l6 6l12-12"/>
+          </g>
+        </svg>
+        <p><%= @task.title %></p>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @objective_completed %>
+  <%= turbo_stream.replace(dom_id(@task.todo, "next_todo")) do %>
+    <div id="<%= dom_id(@task.todo, "next_todo") %>">
+      <p>Bravo, vous avez atteint votre objectif !</p>
+      <%= link_to "VOIR MES OBJECTIFS", objectives_path(@objective), class: "bouton" %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if !@objective_completed && @task.todo.completed? %>
+  <%= turbo_stream.replace(dom_id(@task.todo, "next_todo")) do %>
+    <%= link_to "Passer au jour suivant", next_day_path(@task.todo), class: "bouton", id: dom_id(@task.todo, "next_todo") %>
+  <% end %>
+<% end %>
+
+<% if @task.priority == 1 %>
+  <%= turbo_stream.replace("fokus-btn") do %>
+    <a href="#" class="bouton w-100 my-2 fokus-btn d-none"
+      data-bs-toggle="modal"
+      data-bs-target="#fokusModal"
+      data-task-name="<%= @task.title %>"
+      id="fokus-btn">
+      FOKUS
+    </a>
+  <% end %>
+<% end %>
