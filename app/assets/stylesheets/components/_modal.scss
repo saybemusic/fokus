@@ -1,71 +1,12 @@
-/* --- STRUCTURES DE LIGNE CHECKBOX --- */
-.task-line {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+#timer {
+  font-size: 32px;
 }
 
-.checkbox-wrapper {
-  display: flex;
-  align-items: center;
+
+#taskName {
+  font-size: 24px;
 }
 
-.task-title {
-  margin: 0;
-  flex-grow: 1;
-}
-
-/* --- RESSOURCE IA --- */
-.ressource-block {
-  margin-top: 8px;
-}
-
-/* --- MODAL CUSTOM --- */
-.fokus-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.45);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 99999;
-}
-
-.fokus-modal.hidden {
-  display: none;
-}
-
-.fokus-modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 14px;
-  width: 90%;
-  max-width: 350px;
-  position: relative;
-  text-align: center;
-}
-
-.fokus-modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.fokus-modal-timer {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.fokus-modal-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+.modal-content {
+  border-radius: 24px;
 }

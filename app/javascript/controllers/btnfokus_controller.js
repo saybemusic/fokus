@@ -1,93 +1,96 @@
-let timerInterval;
-let timeLeft = 15 * 60;
-let isRunning = false;
+// app/javascript/controllers/fokus_controller.js
+import { Controller } from "@hotwired/stimulus"
 
-function initFokusModal() {
-  // Supprime tous les anciens event listeners
-  const oldBtns = document.querySelectorAll('.fokus-btn');
-  oldBtns.forEach(btn => {
-    const newBtn = btn.cloneNode(true);
-    btn.parentNode.replaceChild(newBtn, btn);
-  });
+export default class extends Controller {
+  static targets = [
+    "taskName",
+    "timerDisplay",
+    "startButton",
+    "pauseButton",
+    "stopButton"
+  ]
 
-  // Récupère le premier bouton FOKUS existant
-  const fokusBtn = document.querySelector('.fokus-btn');
-  const fokusModalEl = document.getElementById('fokusModal');
-  const taskNameEl = document.getElementById('taskName');
-  const timerDisplay = document.getElementById('timer');
-  const startBtn = document.getElementById('startBtn');
-  const pauseBtn = document.getElementById('pauseBtn');
-  const stopBtn = document.getElementById('stopBtn');
-
-  if (!fokusBtn) return;
-
-  // Met à jour le nom de la tâche
-  const taskName = fokusBtn.dataset.taskName || 'Tâche';
-  taskNameEl.textContent = taskName;
-
-  // Reset timer
-  function resetTimer() {
-    if (timerInterval) clearInterval(timerInterval);
-    isRunning = false;
-    timeLeft = 15 * 60;
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    startBtn.style.display = 'inline-block';
-    pauseBtn.style.display = 'none';
+  static values = {
+    duration: { type: Number, default: 15 * 60 } // en secondes
   }
 
-  // Event listeners pour les boutons du timer
-  startBtn.onclick = function() {
-    if (!isRunning) {
-      isRunning = true;
-      startBtn.style.display = 'none';
-      pauseBtn.style.display = 'inline-block';
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-        timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          isRunning = false;
-          startBtn.style.display = 'inline-block';
-          pauseBtn.style.display = 'none';
-          alert('Session FOKUS terminée ! 🎉');
-        }
-      }, 1000);
-    }
-  };
+  connect() {
+    this.isRunning = false
+    this.timeLeft = this.durationValue
+    this.timerInterval = null
 
-  pauseBtn.onclick = function() {
-    if (isRunning) {
-      isRunning = false;
-      clearInterval(timerInterval);
-      startBtn.style.display = 'inline-block';
-      pauseBtn.style.display = 'none';
-    }
-  };
+    this.updateTaskName()
+    this.updateDisplay()
+  }
 
-  stopBtn.onclick = function() {
-    resetTimer();
-    const modal = bootstrap.Modal.getInstance(fokusModalEl);
-    if (modal) modal.hide();
-  };
+  // --- Actions Stimulus (data-action) ---
+
+  start(event) {
+    if (event) event.preventDefault()
+    if (this.isRunning) return
+
+    this.isRunning = true
+    this.toggleButtons(true)
+
+    this.timerInterval = setInterval(() => {
+      this.timeLeft--
+      this.updateDisplay()
+
+      if (this.timeLeft <= 0) {
+        clearInterval(this.timerInterval)
+        this.isRunning = false
+        this.toggleButtons(false)
+        alert("Session FOKUS terminée ! 🎉")
+        this.reset()
+      }
+    }, 1000)
+  }
+
+  pause(event) {
+    if (event) event.preventDefault()
+    if (!this.isRunning) return
+
+    this.isRunning = false
+    clearInterval(this.timerInterval)
+    this.toggleButtons(false)
+  }
+
+  stop(event) {
+    if (event) event.preventDefault()
+    this.reset()
+    const modal = bootstrap.Modal.getInstance(this.element)
+    if (modal) modal.hide()
+  }
+
+  // --- Méthodes internes ---
+
+  reset() {
+    if (this.timerInterval) clearInterval(this.timerInterval)
+    this.isRunning = false
+    this.timeLeft = this.durationValue
+    this.updateDisplay()
+    this.toggleButtons(false)
+  }
+
+  updateDisplay() {
+    const minutes = Math.floor(this.timeLeft / 60)
+    const seconds = this.timeLeft % 60
+    this.timerDisplayTarget.textContent =
+      `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+  }
+
+  updateTaskName() {
+    const taskName = this.element.dataset.taskName || "Tâche"
+    this.taskNameTarget.textContent = taskName
+  }
+
+  toggleButtons(running) {
+    if (running) {
+      this.startButtonTarget.style.display = "inline-block"
+      this.pauseButtonTarget.style.display = "inline-block"
+    } else {
+      this.startButtonTarget.style.display = "inline-block"
+      this.pauseButtonTarget.style.display = "none"
+    }
+  }
 }
-
-// Initialise au chargement et observe les changements DOM
-document.addEventListener("DOMContentLoaded", initFokusModal);
-
-// Réinitialise après chaque changement de tâches (AJAX/turbo)
-document.addEventListener('turbo:load', initFokusModal);
-document.addEventListener('turbo:render', initFokusModal);
-
-// MutationObserver pour détecter les nouveaux boutons créés dynamiquement
-const observer = new MutationObserver(() => {
-  const fokusBtn = document.querySelector('.fokus-btn');
-  if (fokusBtn && !fokusBtn.hasAttribute('data-fokus-initialized')) {
-    fokusBtn.setAttribute('data-fokus-initialized', 'true');
-    initFokusModal();
-  }
-});
-observer.observe(document.body, { childList: true, subtree: true });
