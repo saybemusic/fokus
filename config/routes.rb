@@ -15,7 +15,11 @@ Rails.application.routes.draw do
 
   resources :todos, only: [:show]
 
-  resources :tasks, only: [:index, :update]
+  resources :tasks, only: [:index, :update] do
+    member do
+      patch :uncomplete
+    end
+  end
 
   get "todos/:id/next_day", to: "todos#next_day", as: :next_day
 

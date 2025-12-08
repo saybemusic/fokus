@@ -85,7 +85,6 @@
       display: flex;
       flex-direction: column;
       color: #333;
-      padding-bottom: 16px; /* laisse de la place pour le footer */
 
       .programmes-carte-link {
         display: block;
@@ -120,6 +119,10 @@
           height: 24px;
           cursor: pointer;
         }
+      }
+
+      &[data-completed="true"] {
+        padding-bottom: 0;
       }
 
       &[data-completed="true"] .programmes-carte-header {

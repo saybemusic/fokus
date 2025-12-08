@@ -6,13 +6,18 @@ class TasksController < ApplicationController
   end
 
   def update
-    @objective = Objective.find(params[:id])
-    @todo = ""
-    todo_of_day(@objective)
-    @task = Task.where(id:params[:task])
+    @task = Task.find(params[:id])
     @task.update(completed: true)
-    redirect_to todo_path(@objective)
-    # raise
+    redirect_to todo_path(@task.todo.objective)
+  end
+
+  def uncomplete
+    @task = Task.find(params[:id])
+    @task.update(completed: false)
+
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   private
@@ -20,18 +25,6 @@ class TasksController < ApplicationController
   def set_task
     @task = Task.find(params[:id])
   end
-
-  def todo_of_day(objective)
-    objective.todos.each do |todo|
-      if todo.completed
-        @todo_yesterday = todo
-      else
-        @todo = todo
-        return
-      end
-    end
-  end
-
 
   def task_params
     params.require(:task).permit(

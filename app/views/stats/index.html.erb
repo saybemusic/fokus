@@ -31,37 +31,22 @@
         </div>
       </div>
 
-      <!-- 3 - Objectif préféré -->
       <div class="stats-card">
         <div class="stats-card-title" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
-          Objectif préféré
+          Tâches créées
         </div>
         <div class="stats-card-body">
-          <% if @favorite_objective %>
-            <p class="stats-card-number"><%= @favorite_objective.goal %></p>
-          <% else %>
-            <p class="stats-card-number">Aucun</p>
-          <% end %>
+          <p class="stats-card-number"><%= @tasks_total %></p>
         </div>
       </div>
 
       <!-- 4 - Tasks complétées -->
       <div class="stats-card">
         <div class="stats-card-title" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
-          Tasks complétées
+          Tâches complétées
         </div>
         <div class="stats-card-body">
           <p class="stats-card-number"><%= @tasks_done %> / <%= @tasks_total %></p>
-        </div>
-      </div>
-
-      <!-- 5 - Total tasks -->
-      <div class="stats-card">
-        <div class="stats-card-title" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
-          Total tasks
-        </div>
-        <div class="stats-card-body">
-          <p class="stats-card-number"><%= @tasks_total %></p>
         </div>
       </div>
 
@@ -85,54 +70,7 @@
         </div>
       </div>
 
-      <!-- 🔥 8 - Productivité quotidienne moyenne -->
-      <div class="stats-card">
-        <div class="stats-card-title" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
-          Productivité moyenne
-        </div>
-        <div class="stats-card-body">
-          <p class="stats-card-number"><%= @productivity_avg %> tasks/jour</p>
-        </div>
-      </div>
 
-      <!-- 🔥 9 - Jour le plus productif -->
-      <div class="stats-card">
-        <div class="stats-card-title" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
-          Jour le plus productif
-        </div>
-        <div class="stats-card-body">
-          <% if @most_productive_day %>
-            <p class="stats-card-number"><%= @most_productive_day.strftime("%d %b %Y") %></p>
-            <small><%= @most_productive_count %> tasks</small>
-          <% else %>
-            <p class="stats-card-number">Aucun</p>
-          <% end %>
-        </div>
-      </div>
-
-      <!-- 🔥 10 - Pourcentage de tâches en retard -->
-      <div class="stats-card">
-        <div class="stats-card-title" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
-          Tâches en retard
-        </div>
-        <div class="stats-card-body">
-          <p class="stats-card-number"><%= @late_percentage %>%</p>
-        </div>
-      </div>
-
-      <!-- 🔥 11 - Heure la plus fréquente -->
-      <div class="stats-card">
-        <div class="stats-card-title" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
-          Heure d’activité
-        </div>
-        <div class="stats-card-body">
-          <% if @favorite_hour %>
-            <p class="stats-card-number"><%= @favorite_hour %>h</p>
-          <% else %>
-            <p class="stats-card-number">N/A</p>
-          <% end %>
-        </div>
-      </div>
 
       <!-- 🔥 12 - Temps total estimé -->
       <div class="stats-card">
@@ -144,43 +82,6 @@
         </div>
       </div>
 
-      <!-- 🔥 13 - Progression moyenne -->
-      <div class="stats-card">
-        <div class="stats-card-title" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
-          Progression moyenne
-        </div>
-        <div class="stats-card-body">
-          <p class="stats-card-number"><%= @avg_progression %>%</p>
-        </div>
-      </div>
-
-      <!-- 🔥 14 - Objectif le plus rapide -->
-      <div class="stats-card">
-        <div class="stats-card-title" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
-          Objectif le plus rapide
-        </div>
-        <div class="stats-card-body">
-          <% if @fastest_objective %>
-            <p class="stats-card-number"><%= @fastest_objective.goal %></p>
-          <% else %>
-            <p class="stats-card-number">Aucun</p>
-          <% end %>
-        </div>
-      </div>
-
-      <!-- 🔥 15 - Objectif le plus lent -->
-      <div class="stats-card">
-        <div class="stats-card-title" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
-          Objectif le plus lent
-        </div>
-        <div class="stats-card-body">
-          <% if @slowest_objective %>
-            <p class="stats-card-number"><%= @slowest_objective.goal %></p>
-          <% else %>
-            <p class="stats-card-number">Aucun</p>
-          <% end %>
-        </div>
-      </div>
 
     </div>
 
