@@ -1,0 +1,70 @@
+.timer-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 5px;
+  padding-bottom: 20px;
+}
+
+.digital-timer {
+  font-size: clamp(3.5rem, 9vw, 6.5rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(135deg, #04ff00 0%, #003901 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(0, 43, 1, 0.4);
+  z-index: 2;
+  position: relative;
+}
+
+.analog-timer {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.2));
+}
+
+.timer-container.text-danger .digital-timer {
+  background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.timer-container.text-danger .analog-timer circle:last-child {
+  fill: #ff4757;
+}
+
+.timer-container.text-danger [data-fokus-target="progressRing"] {
+  stroke: #ff4757;
+  animation: pulse-ring 1s infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { stroke-width: 8; }
+  50% { stroke-width: 12; }
+}
+
+.timer-center {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $noir;
+  user-select: none;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1;
+}
+
+#timer {
+  font-size: 30px;
+}
