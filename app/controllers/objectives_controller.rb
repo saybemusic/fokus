@@ -53,8 +53,9 @@ class ObjectivesController < ApplicationController
   PROMPT
 
   def index
-    @objectives = current_user.objectives
+    @objectives = current_user.objectives.order(created_at: :desc)
   end
+
 
   def new
     @user = current_user

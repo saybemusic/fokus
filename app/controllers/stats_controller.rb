@@ -24,20 +24,10 @@ class StatsController < ApplicationController
     # --- STREAK GLOBAL ---
     @streak = calculate_streak(@days_visited.keys.sort)
 
-    # --- OBJECTIF PRÉFÉRÉ (plus de tâches faites, sinon dernier créé) ---
-    favorite_by_tasks = @objectives.max_by do |o|
-      o.todos.sum { |td| td.tasks.where(completed: true).count }
-    end
-
     total_tasks_done = @objectives.sum do |o|
       o.todos.sum { |td| td.tasks.where(completed: true).count }
     end
 
-    @favorite_objective = if total_tasks_done > 0
-      favorite_by_tasks
-    else
-      @objectives.order(created_at: :desc).first
-    end
 
     # --- PRODUCTIVITÉ QUOTIDIENNE MOYENNE ---
     @productivity_avg = if @days_visited_count > 0
@@ -46,12 +36,6 @@ class StatsController < ApplicationController
       0
     end
 
-    # --- JOUR LE PLUS PRODUCTIF ---
-    @tasks_by_day = @completed_tasks.group_by { |t| t.completed_at.to_date }
-    max_day = @tasks_by_day.max_by { |_, tasks| tasks.size }
-    @most_productive_day = max_day&.first
-    @most_productive_count = max_day ? max_day.last.size : 0
-
     # --- TÂCHES EN RETARD ---
     @late_tasks = @completed_tasks.select do |task|
       task.todo.due_date &&
@@ -59,10 +43,6 @@ class StatsController < ApplicationController
     end
 
     @late_percentage = @tasks_total > 0 ? ((@late_tasks.count.to_f / @tasks_total) * 100).round : 0
-
-    # --- HEURE LA PLUS FRÉQUENTE D’UTILISATION ---
-    @usage_hours = @completed_tasks.map { |t| t.completed_at.hour }
-    @favorite_hour = @usage_hours.group_by(&:itself).max_by { |_, arr| arr.size }&.first
 
     # --- TEMPS TOTAL D’APPRENTISSAGE ESTIMÉ ---
     avg_time = @objectives.average(:time_global).to_i rescue 0

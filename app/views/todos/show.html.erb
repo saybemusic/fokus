@@ -9,7 +9,7 @@
 
   <div class="programmes-main-card">
     <div class="programmes-cards-scroll">
-      <% @todo.tasks.each do |task| %>
+      <% @todo.tasks.order(:priority).each do |task| %>
         <% if task.completed %>
           <div class="programmes-carte" data-completed="true">
             <div class="programmes-carte-header done">
