@@ -144,18 +144,15 @@
 
       .task-summary {
         max-height: 0;
-        opacity: 0;
         overflow: hidden;
-        transition: transform 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+        transition: max-height 1s ease, padding 2s ease;
         padding: 0 16px;
       }
 
       .task-summary.open {
         max-height: 500px; /* big enough for content */
-        opacity: 1;
         padding: 16px;
-        transition: transform 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
-
+        transition: max-height 1.5s ease, padding 1s ease;
       }
 
       &[data-completed="true"] > .todo-carte-header {
