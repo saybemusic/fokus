@@ -1,5 +1,5 @@
 <div class="programmes-page fk-container">
-  <div class="fk-bg"></div>
+  <%# <div class="fk-bg"></div> %>
 
   <header class="programmes-header">
     <div class="fk-header">
@@ -7,29 +7,29 @@
     </div>
   </header>
 
-  <div class="programmes-main-card">
-    <div class="programmes-cards-scroll">
+  <div class="obj-main-card">
       <% if @objectives.any? %>
         <% @objectives.each do |objective| %>
-          <div class="programmes-carte">
-            <%= link_to objective_path(objective), class: "programmes-carte-link" do %>
-              <div class="programmes-carte-header" style="background-image: url('<%= image_path("backgroundHome.png") %>');">
+          <div class="obj-carte">
+            <%= link_to objective_path(objective), class: "obj-carte-link" do %>
+              <div class="obj-carte-header">
                 <p><%= objective.goal %></p>
+                <div class="obj-footer">
+                  <%= link_to objective_path(objective),
+                      data: { turbo_method: :delete, turbo_confirm: "Supprimer ?" },
+                      class: "obj-delete-btn" do %>
+                    <%= image_tag "binw.svg", alt: "Supprimer" %>
+                  <% end %>
+                </div>
               </div>
-              <div class="programmes-carte-body">
-                <p><%= objective.resume %></p>
-                <p>Temps quotidien : <%= objective.time_global %> min</p>
-                <p>Durée du programme : <%= objective.time_due %> jours</p>
+              <div class="obj-carte-body">
+                  <p><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><path fill="$noir" d="M12 4c4.411 0 8 3.589 8 8s-3.589 8-8 8s-8-3.589-8-8s3.589-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2m3.8 13.4L13 11.667V7h-2v5.333l3.2 4.266z"/></svg>
+                  <%= objective.time_global %> min</p>
+                  <p><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><path fill="$noir" d="M19 3h-1V2c0-.55-.45-1-1-1s-1 .45-1 1v1H8V2c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-1.99.9-1.99 2L3 19a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-1 16H6c-.55 0-1-.45-1-1V8h14v10c0 .55-.45 1-1 1M8 10h3c.55 0 1 .45 1 1v3c0 .55-.45 1-1 1H8c-.55 0-1-.45-1-1v-3c0-.55.45-1 1-1"/></svg>
+                  <%= objective.time_due %> jours</p>
               </div>
             <% end %>
 
-            <div class="programme-footer">
-              <%= link_to objective_path(objective),
-                  data: { turbo_method: :delete, turbo_confirm: "Supprimer ?" },
-                  class: "programmes-delete-btn" do %>
-                <%= image_tag "bin.svg", alt: "Supprimer" %>
-              <% end %>
-            </div>
           </div>
         <% end %>
         <%= link_to "CREER UN NOUVEL OBJECTIF",
@@ -52,6 +52,5 @@
           </div>
         </div>
       <% end %>
-    </div>
   </div>
 </div>

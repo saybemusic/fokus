@@ -1,0 +1,70 @@
+.obj-carte {
+  position: relative;
+  background: #f8fafc;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 100px;
+  margin-bottom: 20px;
+}
+
+.obj-carte-link {
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.obj-carte-header {
+  background: linear-gradient(to right, #7dae68 0%, #8bde79 99%) !important;
+  padding: 28px 24px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    margin: 0;
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+}
+
+.obj-carte-body {
+  padding-left: 24px;
+  padding-right: 24px;
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 14px 0;
+    font-size: 0.95rem;
+    color: #334155;
+    font-weight: 500;
+
+    svg {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      fill: #6b7280;
+    }
+  }
+}
+
+.obj-footer img {
+    width: 20px;
+    height: 20px;
+}
+
+.obj-carte:active {
+  transform: none;
+}
+
+.obj-main-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
