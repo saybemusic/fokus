@@ -33,7 +33,9 @@
         <%= image_tag current_user.badge_image, alt: current_user.badge_label, class: "medal" %>
 
         <p>
-          <%= current_user.badge_label %> •
+          <%= current_user.badge_label %>
+        </p>
+        <p>
           <%= pluralize(current_user.completed_objectives_count, "objectif", "objectifs") %> terminés
         </p>
       </div>

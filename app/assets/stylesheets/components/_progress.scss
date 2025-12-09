@@ -6,7 +6,7 @@
   padding: 3px;
   border: 1px solid rgba(0, 0, 0, 0.162);
   overflow: hidden;
-  margin-bottom: 16px;
+  margin: 20px 0;
 }
 
 .fokus-progress-bar {
@@ -14,12 +14,12 @@
   height: 100%;
   width: 0%;
   border-radius: 20px;
-  background: linear-gradient(to right, red 0%, orange 99%);
+  background: linear-gradient(to right, #7dae68 0%, #8dbe79 99%);
   transition: width 0.8s ease-out;
   overflow: hidden;
 
   &.complete {
-    background: linear-gradient(135deg, #37d27a, #2bb266) !important;
+    background: linear-gradient(135deg, #7dae68,  #8dbe79) !important;
 
     .fokus-progress-points { // enfant direct
       animation: none !important;  // stop l'animation
@@ -40,31 +40,4 @@
   z-index: 20;
   pointer-events: none;
   white-space: nowrap;
-}
-
-.fokus-progress-points {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-
-  .fokus-point {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: orange;
-    border-radius: 50%;
-    opacity: 0.9;
-    animation: particleChaos var(--duration) infinite ease-in-out;
-    transition: opacity 0.5s ease; // disparition douce
-  }
-}
-
-/* Animation chaotique des points */
-@keyframes particleChaos {
-  0%   { transform: translate(0, 0); }
-  20%  { transform: translate(var(--dx1), var(--dy1)); }
-  40%  { transform: translate(var(--dx2), var(--dy2)); }
-  60%  { transform: translate(var(--dx3), var(--dy3)); }
-  80%  { transform: translate(var(--dx4), var(--dy4)); }
-  100% { transform: translate(0, 0); }
 }

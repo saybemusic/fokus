@@ -83,7 +83,7 @@ s
       position: relative; /* nécessaire pour le footer absolu */
       border-radius: 32px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      background-color: rgba(255,255,255,0.95);
+      background-color: $blanc;
       overflow: hidden;
       cursor: pointer;
       display: flex;
@@ -130,14 +130,26 @@ s
       }
 
       &[data-completed="true"] .programmes-carte-header {
-        background: linear-gradient(135deg, #37d27a, #2bb266) !important;
+        background: linear-gradient(to right, #7dae68 0%, #8dbe79 99%) !important;
         color: #fff;
+        font-size: 17px;
         opacity: 0.95;
         text-align: center;
+        text-transform: uppercase;
+        opacity: 0.5;
+      }
+
+      &[data-completed="true"] .programmes-carte-body {
+        color: $noir;
+        background: linear-gradient(to right, #7dae6857 0%, #8dbe7965 99%) !important;
+        opacity: 0.5;
       }
 
       &[data-completed="false"] .programmes-carte-header {
-         background: linear-gradient(to right, red 0%, orange 99%) !important;
+        background: linear-gradient(to right, #7dae68 0%, #8dbe79 99%) !important;
+        font-size: 17px;
+        text-align: center;
+        text-transform: uppercase;
       }
     }
   }
