@@ -20,12 +20,6 @@
 
   &.complete {
     background: linear-gradient(135deg, #7dae68,  #8dbe79) !important;
-
-    .fokus-progress-points { // enfant direct
-      animation: none !important;  // stop l'animation
-      opacity: 0 !important;        // fait disparaître les points
-      transition: opacity 0.5s ease; // disparition douce
-    }
   }
 }
 
