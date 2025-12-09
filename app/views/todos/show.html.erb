@@ -1,57 +1,26 @@
-<div class="programmes-page fk-container">
+<div class="todo-page fk-container">
 
   <div class="back-arrow" data-controller="back-arrow">
     <%= link_to "←", objective_path(@objective), class: "back-link" %>
   </div>
 
   <div class="fk-header">
-    <h1 class="programmes-fk-title"><%= @todo.title %></h1>
-    <p class="programmes-fk-subtitle"><strong>Jour :</strong> <%= @todo.to_ordered_day() %></p>
+    <h1 class="todo-fk-title"><%= @todo.title %></h1>
+    <p class="todo-fk-subtitle"><strong>Jour :</strong> <%= @todo.to_ordered_day() %></p>
   </div>
 
-  <h2 class="programmes-fk-subtitle">Tâches du jour</h2>
+  <h2 class="todo-fk-subtitle">Tâches du jour</h2>
 
-  <div class="programmes-main-card">
-    <div class="programmes-cards-scroll">
+  <div class="todo-main-card">
+    <div class="todo-cards-scroll">
       <% @todo.tasks.order(:priority).each do |task| %>
         <% if task.completed %>
-          <%= link_to uncomplete_task_path(task), data: { turbo_method: :patch, turbo: true }, id: dom_id(task) do %>
-            <div  class="programmes-carte" data-completed="true">
-              <div class="programmes-carte-header done">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
-                  <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4">
-                    <path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/>
-                    <path stroke-linecap="round" d="m16 24l6 6l12-12"/>
-                  </g>
-                </svg>
-                <p><%= task.title %></p>
-              </div>
-            </div>
-          <% end %>
+          <%= render partial: "tasks/complete_card", locals: { task: task } %>
         <% else %>
-          <div id="<%= dom_id(task) %>" class="programmes-carte" data-completed="false">
-            <div class="programmes-carte-header pending">
-              <%= link_to complete_task_path(task), data: { turbo_method: :patch, turbo: true }, class: "blanc" do %>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
-                  <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4">
-                    <path d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"/>
-                  </g>
-                </svg>
-              <% end %>
-              <p><%= task.title %></p>
-            </div>
-            <div class="programmes-carte-body">
-              <details>
-                <summary>Comment faire ?</summary>
-                <p><%= task.ressource_ia %></p>
-              </details>
-            </div>
-          </div>
+          <%= render partial: "tasks/uncomplete_card", locals: { task: task } %>
         <% end %>
       <% end %>
     </div>
-
-
 
     <% if @objective_completed %>
       <div id="<%= dom_id(@todo, "next_todo") %>">
@@ -99,9 +68,6 @@
         </h5>
 
         <div class="timer-container" data-fokus-target="timerContainer">
-          <%# <div id="timer" class="digital-timer" data-fokus-target="timerDisplay"> %>
-            <%# 15:00 %>
-          <%# </div> %>
           <svg class="analog-timer" viewBox="0 0 200 200">
             <circle cx="100" cy="100" r="85" fill="none" stroke="#e0e0e0" stroke-width="8"/>
             <circle cx="100" cy="100" r="85" fill="none" stroke="#003901" stroke-width="8"
@@ -116,7 +82,6 @@
                       stroke-linecap="round"/>
               <% end %>
             </g>
-            <!-- Cercle central remplacé par un conteneur <foreignObject> pour le timer numérique -->
             <foreignObject x="60" y="60" width="80" height="80">
               <div xmlns="http://www.w3.org/1999/xhtml" class="timer-center">
                 <div id="timer" data-fokus-target="timerDisplay">
