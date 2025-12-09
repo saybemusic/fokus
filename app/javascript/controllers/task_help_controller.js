@@ -3,7 +3,11 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["body"]
 
+  connect() {
+    this.bodyTarget.classList.remove("open")
+  }
+
   toggle() {
-    this.bodyTarget.style.display = this.bodyTarget.style.display === "none" ? "block" : "none"
+    this.bodyTarget.classList.toggle("open")
   }
 }
