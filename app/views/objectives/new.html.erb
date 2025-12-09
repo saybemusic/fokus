@@ -14,7 +14,10 @@
                     error: "L'objectif est requis" %>
         <%= f.input :time_due, label: "Durée du programme (jours)",
                     as: :integer, required: true,
-                    input_html: { min: 1, required: true },
+                    input_html: { min: 1, required: true,
+                                  inputmode: "numeric",
+                                  pattern: "[0-9]*",
+                                  oninput: "this.value = this.value.replace(/[^0-9]/g,'')" },
                     error: "La durée est requis" %>
         <%= f.input :time_global, label: "Temps quotidien disponible (minutes)",
                     as: :select, required: true,
