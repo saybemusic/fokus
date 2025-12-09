@@ -1,5 +1,7 @@
 <div class="programmes-page fk-container">
-
+  <div class="back-arrow" data-controller="back-arrow">
+    <%= link_to "←", objectives_path, class: "back-link" %>
+  </div>
     <div class="fk-header" id="header-obj" style="background-image: url('<%= image_path("backgroundFeature.png") %>'); background-size: cover;">
       <h1 class="programmes-fk-title"><%= @objective.goal %></h1>
       <div class="d-flex justify-content-between w-70">
@@ -50,9 +52,6 @@
         <% else %>
           <p>Aucun programme généré pour cet objectif.</p>
         <% end %>
-      <div class="btn-back">
-        <%= link_to "Retour aux objectifs", objectives_path, class: "bouton" %>
-      </div>
       </div>
       </div>
 
