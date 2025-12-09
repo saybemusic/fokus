@@ -1,0 +1,154 @@
+.todo-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px 16px;
+  box-sizing: border-box;
+
+  a {
+    text-decoration: none;
+  }
+
+  p {
+    margin: 4px;
+  }
+
+  h2 {
+    text-align: center;
+    color: $noir;
+  }
+
+  .todo-fk-title {
+    color: black;
+    margin: 0;
+    font-size: 40px;
+  }
+
+  .todo-fk-subtitle {
+    color: black;
+    margin-top: 8px;
+  }
+
+  /* Background */
+  .fk-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150vh;
+    z-index: -1;
+    background-image: asset-url("backgroundForm.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Header */
+  .todo-header {
+    text-align: center;
+    margin: 30px 0;
+
+    h1 {
+      font-size: 2.5rem;
+      color: $noir;
+
+      .todo-dot {
+        color: #ff4fa5;
+      }
+    }
+  }
+
+  /* Carte principale */
+  .todo-main-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    width: 100%;
+
+    .todo-cards-scroll {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 100%;
+      max-width: 600px;
+      padding: 8px;
+      margin: auto 0 75px 0;
+    }
+
+    .todo-carte {
+      position: relative;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      background-color: rgba(255,255,255,0.95);
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      color: #333;
+
+      &-header {
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 16px;
+        margin: 0.5rem;
+
+        .header-left {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+
+          svg {
+            cursor: pointer;
+          }
+
+          .todo-title {
+            margin: 0;
+            text-align: center;
+            font-weight: 500;
+            color: #fff;
+          }
+        }
+
+        .card-help {
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          color: #333;
+          font-weight: bold;
+          cursor: pointer;
+          text-align: center;
+          line-height: 28px;
+        }
+      }
+
+      &-body {
+        padding: 16px;
+
+        .task-summary {
+          display: none; // affichage toggle via Stimulus
+          margin-top: 8px;
+          text-align: center;
+        }
+      }
+
+      &[data-completed="true"] > .todo-carte-header {
+        background: linear-gradient(135deg, #37d27a, #2bb266) !important;
+        color: #fff;
+        opacity: 0.95;
+        text-align: center;
+      }
+
+      &[data-completed="false"] > .todo-carte-header {
+        background: linear-gradient(to right, red 0%, orange 99%) !important;
+      }
+    }
+  }
+}
