@@ -17,7 +17,7 @@ class ObjectivesController < ApplicationController
   3. Respect the daily maximum time constraint.
   4. The program must be progressive and pedagogical.
   5. Provide clear titles and descriptions for each todo.
-  6. Every task should come with a helpful tip in ressource_ia to guide the user (e.g. "Search on Google: How to…" or "This website can help you").
+  6. Each task should include a clear and actionable tip in ressource_ia to help the user start effectively.
   7. Assign a "priority" (integer) to each task to define execution order.
   8. The JSON output must be strictly valid (double quotes, no trailing commas).
   9. There should be minimum four task per todos but you can more task per todos if it's necessary.
