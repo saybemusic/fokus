@@ -1,15 +1,17 @@
 <div class="programmes-page fk-container">
 
-    <div class="fk-header" >
+    <div class="fk-header" id="header-obj" style="background-image: url('<%= image_path("backgroundFeature.png") %>'); background-size: cover;">
       <h1 class="programmes-fk-title"><%= @objective.goal %></h1>
-      <p class="programmes-fk-subtitle"><%= @objective.resume %></p>
-      <p class="programmes-fk-subtitle">
-        <strong>Durée totale :</strong> <%= @objective.time_due %> jours
-      </p>
-      <p class="programmes-fk-subtitle">
-        <strong>Temps quotidien disponible :</strong>
-        <%= @objective.time_global %> minutes
-      </p>
+      <div class="d-flex justify-content-between w-70">
+        <p class="header-p">
+          <strong><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><path fill="#f2f2f2" d="M19 3h-1V2c0-.55-.45-1-1-1s-1 .45-1 1v1H8V2c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-1.99.9-1.99 2L3 19a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-1 16H6c-.55 0-1-.45-1-1V8h14v10c0 .55-.45 1-1 1M8 10h3c.55 0 1 .45 1 1v3c0 .55-.45 1-1 1H8c-.55 0-1-.45-1-1v-3c0-.55.45-1 1-1"/></svg></strong>
+          <%= @objective.time_due %> jours
+        </p>
+        <p class="header-p">
+          <strong><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><path fill="#f2f2f2" d="M12 4c4.411 0 8 3.589 8 8s-3.589 8-8 8s-8-3.589-8-8s3.589-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2m3.8 13.4L13 11.667V7h-2v5.333l3.2 4.266z"/></svg></strong>
+          <%= @objective.time_global %> minutes
+        </p>
+      </div>
     </div>
 
       <% progress = objective_progress(@objective) %>
@@ -23,8 +25,6 @@
             </div>
           </div>
 
-    <h2 class="programmes-fk-subtitle">Programme détaillé</h2>
-
     <div class="programmes-main-card">
     <div class="programmes-cards-scroll">
       <% if @objective.todos.any? %>
@@ -36,7 +36,7 @@
                  style="background-image: url('<%= image_path("backgroundHome.png") %>');
                         background-size: cover;">
                     <%= todo.completed ?
-                    "Jour #{todo.to_ordered_day} : Terminé ✔" :
+                    "Jour #{todo.to_ordered_day}" :
                     "Jour #{todo.to_ordered_day} : #{todo.title}" %>
 
             </div>
