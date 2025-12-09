@@ -52,21 +52,9 @@
   margin: 0;
 }
 
-.btn-back {
+.back-arrow {
   margin: 2rem 16px 1rem 16px;
   display: flex;
-  justify-content: center;
-}
-
-.btn-back .bouton {
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  padding: 14px 28px;
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 12px;
-  min-height: 48px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  text-align: center;
 }
 
 .btn-FOKUS {
@@ -99,11 +87,6 @@
 
 @media (max-width: 768px) {
   .card {
-    margin-left: 12px;
-    margin-right: 12px;
-  }
-
-  .btn-back {
     margin-left: 12px;
     margin-right: 12px;
   }
