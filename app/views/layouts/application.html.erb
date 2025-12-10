@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Fokus</title>
+    <title>Fokus sur vos objectifs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
     <%= tag.link rel: "manifest", href: webmanifest_path(format: :json) %>
     <%= tag.link rel: "icon", href: image_url("icon.png"), type: "image/png" %>
     <%= tag.link rel: "apple-touch-icon", href: image_url("icon.png") %>
-
+    <meta property="og:title" content="Fokus sur vos objectifs">
+    <meta property="og:description" content="Fokus génère un plan d’action personnalisé selon vos objectifs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.fokus-app.me">
+    <meta property="og:image" content="<%= image_url('og.png') %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
