@@ -2,7 +2,7 @@
   transition: transform 0.3s ease;
   position: relative;
   z-index: 4000;
-  position: sticky;
+  position: fixed;
   top:0;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
