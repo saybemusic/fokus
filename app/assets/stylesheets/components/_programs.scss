@@ -22,7 +22,7 @@ s
   .programmes-fk-title {
     color:black;
     margin: 0;
-    font-size: 40px;
+    font-size: 32px;
   }
 
   .programmes-fk-subtitle {
@@ -81,7 +81,7 @@ s
 
     .programmes-carte {
       position: relative; /* nécessaire pour le footer absolu */
-      border-radius: 32px;
+      border-radius: 16px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       background-color: $blanc;
       overflow: hidden;
@@ -105,7 +105,7 @@ s
         font-weight: 600;
         color: #fff;
         background-size: cover;
-        border-radius: 32px 32px 0 0;
+        border-radius: 16px 16px 0 0;
       }
 
       &-body {
