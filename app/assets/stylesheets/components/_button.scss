@@ -10,7 +10,7 @@
   border: 0px solid;
   background: linear-gradient(45deg, #24321d,  #506349, #7dae68) !important;
   background-size: 300% 200%;
-  border-radius: 50px;
+  border-radius: 12px;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }
 
@@ -29,6 +29,8 @@
   color: $blanc;
   left: 50%;
   transform: translateX(-50%);
+  font-size: 24px;
+  font-weight: 400;
 }
 
 .dbtn {
