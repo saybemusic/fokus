@@ -1,8 +1,8 @@
 <div id="<%= dom_id(task) %>" class="todo-carte" data-controller="task-help" data-completed="true">
   <div class="todo-carte-header">
+    <%= link_to uncomplete_task_path(task), data: { turbo_method: :patch, turbo: true } do %>
     <!-- Partie gauche : checkbox + titre centrés verticalement -->
     <div class="header-left">
-      <%= link_to uncomplete_task_path(task), data: { turbo_method: :patch, turbo: true } do %>
         <!-- Checkbox complétée -->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
           <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4">
@@ -10,10 +10,10 @@
             <path stroke-linecap="round" d="m16 24l6 6l12-12"/>
           </g>
         </svg>
-      <% end %>
 
       <p class="todo-title"><%= task.title %></p>
     </div>
+    <% end %>
 
   </div>
 

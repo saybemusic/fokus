@@ -6,14 +6,14 @@
   <%= turbo_stream.replace(dom_id(@task.todo, "next_todo")) do %>
     <div id="<%= dom_id(@task.todo, "next_todo") %>">
       <p>Bravo, vous avez atteint votre objectif !</p>
-      <%= link_to "VOIR MES OBJECTIFS", objectives_path(@objective), class: "bouton" %>
+      <%= link_to "VOIR MES OBJECTIFS", objectives_path(@objective), class: "bouton fokus-btn" %>
     </div>
   <% end %>
 <% end %>
 
 <% if !@objective_completed && @task.todo.completed? %>
   <%= turbo_stream.replace(dom_id(@task.todo, "next_todo")) do %>
-    <%= link_to "Passer au jour suivant", next_day_path(@task.todo), class: "bouton", id: dom_id(@task.todo, "next_todo") %>
+    <%= link_to "Passer au jour suivant", next_day_path(@task.todo), class: "bouton fokus-btn", id: dom_id(@task.todo, "next_todo") %>
   <% end %>
 <% end %>
 

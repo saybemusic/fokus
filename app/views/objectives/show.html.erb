@@ -51,12 +51,10 @@
       </div>
       </div>
 
+      <% if !@objective.todos.order(:due_date).find_by(completed: false).nil? %>
+        <%= link_to "COMMENCER", todo_path(@objective.todos.order(:due_date).find_by(completed: false)), class: "bouton fokus-btn", id: "fokus-btn" %>
+      <% end %>
 
-      <div class="btn-FOKUS">
-        <% if !@objective.todos.order(:due_date).find_by(completed: false).nil? %>
-          <%= link_to "COMMENCER", todo_path(@objective.todos.order(:due_date).find_by(completed: false)), class: "bouton" %>
-        <% end %>
-      </div> <!-- objective-details -->
 
   </div> <!-- fk-container -->
 

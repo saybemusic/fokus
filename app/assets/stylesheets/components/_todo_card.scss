@@ -21,7 +21,7 @@
   .todo-fk-title {
     color: $noir;
     margin: 0;
-    font-size: 40px;
+    font-size: 32px;
   }
 
   .todo-fk-subtitle {
@@ -66,6 +66,7 @@
     justify-content: center;
     min-height: 200px;
     width: 100%;
+    margin: 0 0 115px 0;
 
     .todo-cards-scroll {
       display: flex;
@@ -74,7 +75,7 @@
       width: 100%;
       max-width: 600px;
       padding: 8px;
-      margin: auto 0 75px 0;
+      margin: auto 0 10px 0;
     }
 
     .todo-carte {
@@ -165,4 +166,8 @@
       }
     }
   }
+}
+
+#showtodo {
+  margin: 10px 0 10px 0;
 }
