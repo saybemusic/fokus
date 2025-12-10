@@ -1,6 +1,6 @@
 <div class="todo-page fk-container">
   <%= link_to "Retour", objective_path(@objective), class: "back-link" %>
-  <div class="fk-header showtodo">
+  <div class="fk-header" id="showtodo">
     <h1 class="todo-fk-title"><%= @todo.title %></h1>
     <p class="todo-fk-subtitle"><strong>Jour :</strong> <%= @todo.to_ordered_day() %></p>
   </div>
@@ -14,21 +14,6 @@
           <%= render partial: "tasks/uncomplete_card", locals: { task: task } %>
         <% end %>
       <% end %>
-    </div>
-
-    <% if @objective_completed %>
-      <div id="<%= dom_id(@todo, "next_todo") %>">
-        <p>Bravo, vous avez atteint votre objectif !</p>
-        <%= link_to "VOIR MES OBJECTIFS", objectives_path(@objective), class: "bouton" %>
-      </div>
-    <% else %>
-      <% if @todo_just_completed %>
-        <%= link_to "Passer au jour suivant", next_day_path(@todo), class: "bouton", id: dom_id(@todo, "next_todo") %>
-      <% else %>
-        <div id="<%= dom_id(@todo, "next_todo") %>"></div>
-      <% end %>
-    <% end %>
-
     <% @todo.tasks.each do |task| %>
       <% if task.priority == 1 && !task.completed %>
         <a href="#" class="bouton w-100 my-2 fokus-btn"
@@ -41,6 +26,25 @@
       <% end %>
     <% end %>
   </div>
+  <div class="dbtn">
+    <% if @objective_completed %>
+      <div id="<%= dom_id(@todo, "next_todo") %>">
+        <p>Bravo, vous avez atteint votre objectif !</p>
+      </div>
+        <%= link_to "VOIR MES OBJECTIFS", objectives_path(@objective), class: "bouton fokus-btn" %>
+    <% else %>
+      <% if @todo_just_completed %>
+        <%= link_to "Passer au jour suivant", next_day_path(@todo), class: "bouton fokus-btn", id: dom_id(@todo, "next_todo") %>
+      <% else %>
+        <div id="<%= dom_id(@todo, "next_todo") %>"></div>
+      <% end %>
+    <% end %>
+  </div>
+    </div>
+
+
+
+
 </div>
 
 <div class="modal fade"

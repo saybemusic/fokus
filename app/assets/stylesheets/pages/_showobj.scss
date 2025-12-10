@@ -77,7 +77,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
   position: relative;
   overflow: hidden;
   white-space: nowrap;
@@ -95,5 +94,14 @@
     padding: 14px 28px;
     font-size: 16px;
     min-height: 52px;
+  }
+}
+
+.showobj {
+  padding: 15px 16px;
+
+  .bouton {
+    position: fixed;
+    bottom: env(safe-area-inset-bottom, 20px);
   }
 }
