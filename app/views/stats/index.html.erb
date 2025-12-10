@@ -17,7 +17,7 @@
           Objectifs créés
         </div>
         <div class="stats-card-body">
-          <p class="stats-card-number"><%= @objectives_count %></p>
+          <p><%= @objectives_count %></p>
         </div>
       </div>
 
@@ -27,7 +27,7 @@
           Objectifs complétés
         </div>
         <div class="stats-card-body">
-          <p class="stats-card-number"><%= @objectives_completed %></p>
+          <p><%= @objectives_completed %></p>
         </div>
       </div>
 
@@ -36,7 +36,7 @@
           Tâches créées
         </div>
         <div class="stats-card-body">
-          <p class="stats-card-number"><%= @tasks_total %></p>
+          <p><%= @tasks_total %></p>
         </div>
       </div>
 
@@ -46,7 +46,7 @@
           Tâches complétées
         </div>
         <div class="stats-card-body">
-          <p class="stats-card-number"><%= @tasks_done %> / <%= @tasks_total %></p>
+          <p><%= @tasks_done %> / <%= @tasks_total %></p>
         </div>
       </div>
 
@@ -56,7 +56,7 @@
           Jours actifs
         </div>
         <div class="stats-card-body">
-          <p class="stats-card-number"><%= @days_visited_count %></p>
+          <p><%= @days_visited_count %></p>
         </div>
       </div>
 
@@ -66,7 +66,7 @@
           Streak actuel
         </div>
         <div class="stats-card-body">
-          <p class="stats-card-number"><%= @streak %> jours</p>
+          <p><%= @streak %> jours</p>
         </div>
       </div>
 
@@ -78,7 +78,7 @@
           Temps total estimé
         </div>
         <div class="stats-card-body">
-          <p class="stats-card-number"><%= @total_learning_time %> min</p>
+          <p><%= @total_learning_time %> min</p>
         </div>
       </div>
 
@@ -86,6 +86,6 @@
     </div>
 
 
-      <%= link_to "Statistiques de tous mes objectifs", stats_objectives_path %>
+      <%# <%= link_to "Statistiques de tous mes objectifs", stats_objectives_path %>
   </div>
 </div>

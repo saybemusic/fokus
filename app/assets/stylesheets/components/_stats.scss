@@ -45,20 +45,24 @@
 .stats-container {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
 }
 
 /* GRID DES CARTES */
 .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: center;
+  // grid-template-columns: repeat(2, 1fr);
+  flex-wrap: wrap;
   gap: 16px;
 }
 
 /* CARTE */
 .stats-card {
   background: rgba(255, 255, 255, 0.92);
+  width:130px;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.12);
@@ -67,6 +71,8 @@
 /* TITRE CARTE AVEC IMAGE */
 .stats-card-title {
   padding: 12px;
+  min-height: 30px;
+  text-transform: uppercase;
   text-align: center;
   font-weight: bold;
   color: white;
@@ -76,12 +82,24 @@
 
 /* BODY CARTE */
 .stats-card-body {
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
   text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #222;
+
+  p {
+    margin:0;
+  }
 }
 
+
+
 .stats-card-number {
-  font-size: 28px;
+  font-size: 16px;
   font-weight: bold;
   color: #222;
 }
