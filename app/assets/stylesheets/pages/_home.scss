@@ -76,6 +76,7 @@
   display: flex;
   width: 100%;
   overflow: hidden;
+  min-height: 100px;
   margin-top: 8px;
   border-radius: 14px;
   background: #ffffff;
@@ -163,8 +164,8 @@
 }
 
 .fokus-slider-arrow {
-  font-size: 1.4rem;
-  transform: translateX(1px);
+  font-size: 2.4rem;
+  transform: translate(1px , -3px);
 }
 
 @keyframes fokus-pulse {
@@ -176,6 +177,7 @@
 
 .fokus-slider-text {
   animation: fokus-pulse 2s infinite;
+  margin-left: 33px;
 }
 
 
@@ -192,5 +194,3 @@
     opacity: 1;
   }
 }
-
-
