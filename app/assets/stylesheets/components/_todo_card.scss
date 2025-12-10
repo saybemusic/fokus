@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding: 30px 16px;
+  padding: 15px 16px;
   box-sizing: border-box;
 
   a {
@@ -19,13 +19,13 @@
   }
 
   .todo-fk-title {
-    color: black;
+    color: $noir;
     margin: 0;
     font-size: 40px;
   }
 
   .todo-fk-subtitle {
-    color: black;
+    color: $noir;
     margin-top: 8px;
   }
 

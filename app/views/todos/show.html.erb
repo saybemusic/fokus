@@ -1,15 +1,9 @@
 <div class="todo-page fk-container">
-
-  <div class="back-arrow" data-controller="back-arrow">
-    <%= link_to "←", objective_path(@objective), class: "back-link" %>
-  </div>
-
-  <div class="fk-header">
+  <%= link_to "Retour", objective_path(@objective), class: "back-link" %>
+  <div class="fk-header showtodo">
     <h1 class="todo-fk-title"><%= @todo.title %></h1>
     <p class="todo-fk-subtitle"><strong>Jour :</strong> <%= @todo.to_ordered_day() %></p>
   </div>
-
-  <h2 class="todo-fk-subtitle">Tâches du jour</h2>
 
   <div class="todo-main-card">
     <div class="todo-cards-scroll">
