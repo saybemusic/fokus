@@ -1,67 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Erreur 404 — Page introuvable</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google Font Bebas Neue -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: 'Bebas Neue', sans-serif;
+      color: #0f4d0f;
+      background: #EAF4F4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+    h1 {
+      font-size: 120px;
+      margin: 0;
+      font-weight: 400;
+      color: #0f4d0f;
+      text-shadow: 0 0 10px rgba(15,77,15,0.5);
+      z-index: 2;
+    }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    p {
+      margin: 15px 0;
+      font-size: 22px;
+      max-width: 650px;
+      line-height: 1.5;
+      color: #06420c;
+      z-index: 2;
+    }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+    a {
+      padding: 14px 28px;
+      background: #0f4d0f;
+      color: #EAF4F4;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 18px;
+      font-weight: 400;
+      transition: .3s;
+      box-shadow: 0 0 8px rgba(15,77,15,.4);
+      z-index: 2;
+    }
+    a:hover {
+      background: #06420c;
+      transform: scale(1.05);
+      box-shadow: 0 0 14px rgba(15,77,15,.7);
+    }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    .matrix {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .matrix span {
+      position: absolute;
+      top: -50px;
+      color: #0f4d0f;
+      font-size: 18px;
+      opacity: 0.7;
+      animation-name: drop;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes drop {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0.1; }
+    }
   </style>
 </head>
+<body>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
+  <h1>404</h1>
+  <p><strong>La page demandée est introuvable.</strong></p>
+  <p>Elle semble s’être perdue dans le flux de données. Vérifiez l’adresse ou retournez à la page d’accueil.</p>
+  <a href="/">Retour à l'accueil</a>
+
+  <div class="matrix" id="matrix"></div>
+
+  <script>
+    const matrix = document.getElementById('matrix');
+    const chars = ['0', '4'];
+    const count = 100; // nombre de chiffres
+
+    for(let i = 0; i < count; i++){
+      const span = document.createElement('span');
+      span.textContent = chars[Math.floor(Math.random()*chars.length)];
+      span.style.left = Math.random() * 100 + '%';
+      span.style.fontSize = (12 + Math.random()*12) + 'px';
+      const duration = 4 + Math.random() * 6; // 4s à 10s
+      const delay = Math.random() * 5; // décalage aléatoire au départ
+      span.style.animationDuration = duration + 's';
+      span.style.animationDelay = delay + 's';
+      matrix.appendChild(span);
+    }
+  </script>
+
 </body>
 </html>
