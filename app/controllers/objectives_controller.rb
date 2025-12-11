@@ -10,18 +10,20 @@ class ObjectivesController < ApplicationController
   - Goal: objectif
   - Program duration in days: duree_programme
   - Daily available time in minutes: temps_quotidien
+  - Optionnal notes : resume
 
   Constraints:
-  1. Each todo represents one day of the program.
-  2. Each task is a concrete action to be completed on that day.
-  3. Respect the daily maximum time constraint.
-  4. The program must be progressive and pedagogical.
-  5. Provide clear titles and descriptions for each todo.
-  6. Each task should include a clear and actionable tip in ressource_ia to help the user start effectively.
-  7. Assign a "priority" (integer) to each task to define execution order.
-  8. The JSON output must be strictly valid (double quotes, no trailing commas).
-  9. There should be minimum four task per todos but you can more task per todos if it's necessary.
-  10. Every value should be in french
+  1. Take the user’s constraints into account.
+  2. Each todo represents one day of the program.
+  3. Each task is a concrete action for adult to be completed on that day.
+  4. Respect the daily maximum time constraint.
+  5. The program must be progressive and pedagogical.
+  6. Provide clear titles and descriptions for each todo.
+  7. Each task should include a clear and actionable tip in ressource_ia to help the user start effectively.
+  8. Assign a "priority" (integer) to each task to define execution order.
+  9. The JSON output must be strictly valid (double quotes, no trailing commas).
+  10. There should be minimum four task per todos but you can more task per todos if it's necessary.
+  11. Every value should be in french
 
   MANDATORY output format:
 
@@ -78,7 +80,8 @@ class ObjectivesController < ApplicationController
       program_data = generate_program_llm(
         goal: @objective.goal,
         time_global: @objective.time_global,
-        time_due: @objective.time_due
+        time_due: @objective.time_due,
+        resume: @objective.resume
         )
         create_todos_and_tasks(@objective, program_data)
 
@@ -122,14 +125,15 @@ class ObjectivesController < ApplicationController
       )
   end
 
-  def generate_program_llm(goal:, time_global:, time_due:)
+  def generate_program_llm(goal:, time_global:, time_due:, resume:)
     ruby_llm = RubyLLM.chat
     llm_request = ruby_llm.with_instructions(SYSTEM_PROMPT)
 
     response = llm_request.ask({
       objectif: @objective.goal,
       duree_programme: @objective.time_due,
-      temps_quotidien: @objective.time_global
+      temps_quotidien: @objective.time_global,
+      resume: @objective.resume
       }.to_json)
         response = JSON.parse(response.content)
         JSON::ParserError
