@@ -54,16 +54,15 @@
 .stats-grid {
   display: flex;
   justify-content: center;
-  // grid-template-columns: repeat(2, 1fr);
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 32px;
 }
 
 /* CARTE */
 .stats-card {
   background: rgba(255, 255, 255, 0.92);
-  width:130px;
-  border-radius: 20px;
+  width:140px;
+  border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
@@ -71,7 +70,7 @@
 /* TITRE CARTE AVEC IMAGE */
 .stats-card-title {
   padding: 12px;
-  min-height: 30px;
+  min-height: 72px;
   text-transform: uppercase;
   text-align: center;
   font-weight: bold;
@@ -85,7 +84,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30px;
+  height: 35px;
   text-align: center;
   font-size: 16px;
   font-weight: bold;
