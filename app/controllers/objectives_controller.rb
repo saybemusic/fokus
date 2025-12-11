@@ -1,58 +1,8 @@
 class ObjectivesController < ApplicationController
   before_action :set_objective, only: [:show, :update, :destroy]
 
-  SYSTEM_PROMPT = <<~PROMPT
-  You are an expert planner specializing in pedagogy and learning all objectives.
 
-  Your mission: create a structured learning program based on the user's information.
 
-  User inputs:
-  - Goal: objectif
-  - Program duration in days: duree_programme
-  - Daily available time in minutes: temps_quotidien
-  - Optionnal notes : resume
-
-  Constraints:
-  1. Take the input user’s constraints into account and strictly respect it.
-  2. Each todo represents one day of the program.
-  3. Each task is a concrete action for adult to be completed on that day.
-  4. Respect the daily maximum time constraint.
-  5. The program must be progressive and pedagogical.
-  6. Provide clear titles and descriptions for each todo.
-  7. Each task should include a clear and actionable tip in ressource_ia to help the user start effectively (never give link for that).
-  8. Assign a "priority" (integer) to each task to define execution order.
-  9. The JSON output must be strictly valid (double quotes, no trailing commas).
-  10. There should be minimum four task per todos but you can more task per todos if it's necessary.
-  11. Every value should be in french
-
-  MANDATORY output format:
-
-  {
-    todos: [
-      {
-        day: 1,
-        title: "Todo title",
-        description: "Description of the day",
-        tasks: [
-          {
-            description: "Task name",
-            ressource_ia: "details/protocol",
-            priority: 1
-          },
-          {
-            description: " Second Task name",
-            ressource_ia: "details/protocol",
-            priority: 1
-          },
-          ...
-        ]
-      }
-    ]
-  }
-
-  Generate the complete program for the total number of requested days, with detailed todos and tasks.
-  Return strictly the JSON only, with no explanations or additional text.
-  PROMPT
 
   def index
     @objectives = current_user.objectives.order(created_at: :desc)
@@ -69,33 +19,26 @@ class ObjectivesController < ApplicationController
   end
 
   def create
-
     @objective = Objective.new(objective_params)
     @objective.user = current_user
-    @objective.system_prompt = SYSTEM_PROMPT
-    # @objective.goal = params[:goal]
-    # @objective.time_due = params[:time_due]
-    # @objective.time_global = params[:time_global]
-    if @objective.save
-      program_data = generate_program_llm(
-        goal: @objective.goal,
-        time_global: @objective.time_global,
-        time_due: @objective.time_due,
-        resume: @objective.resume
-        )
-        create_todos_and_tasks(@objective, program_data)
 
-        if @objective.todos.count < 1
-          @objective.destroy
-          redirect_to new_objective_path, alert: "Erreur lors de la génération du programme."
-          return
-        end
-        @todos = Todo.all
-        redirect_to @objective, notice: "Objectif créé et programme généré avec succès."
-      else
-        render :new, status: :unprocessable_entity
+
+
+    if @objective.save
+      FakeJob.perform_later(@objective)
+      redirect_to @objective, notice: "Objectif créé et programme généré avec succès."
+
+      respond_to do |format|
+        format.html { redirect_to @objective, notice: "Objectif créé et programme généré avec succès." }
+        format.turbo_stream
+      end
+    else
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render :new, status: :unprocessable_entity }
       end
     end
+  end
 
   def update
     if @objective.update(objective_params)
@@ -125,43 +68,5 @@ class ObjectivesController < ApplicationController
       )
   end
 
-  def generate_program_llm(goal:, time_global:, time_due:, resume:)
-    ruby_llm = RubyLLM.chat
-    llm_request = ruby_llm.with_instructions(SYSTEM_PROMPT)
 
-    response = llm_request.ask({
-      objectif: @objective.goal,
-      duree_programme: @objective.time_due,
-      temps_quotidien: @objective.time_global,
-      resume: @objective.resume
-      }.to_json)
-        response = JSON.parse(response.content)
-        JSON::ParserError
-        # { "todos" => [] }
-        response
-  end
-
-  def create_todos_and_tasks(objective, data)
-
-    data["todos"].each do |todo_data|
-    @todo = Todo.new(
-      due_date:  Date.current + (todo_data["day"] - 1),
-      title: todo_data["title"],
-      description: todo_data["description"],
-      )
-        @todo.objective_id = objective.id
-        @todo.save
-
-          todo_data["tasks"].each do |task_data|
-          @task = Task.new(
-            title: task_data["description"],
-            priority: task_data["priority"],
-            todo_id: @todo,
-            ressource_ia: task_data["ressource_ia"]
-            )
-              @task.todo_id = @todo.id
-              @task.save
-          end
-      end
-  end
 end

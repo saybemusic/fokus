@@ -1,0 +1,35 @@
+<% if objective.todos.exists? %>
+  <div class="programmes-main-card">
+    <div class="programmes-cards-scroll">
+      <% objective.todos.order(:due_date).each do |todo| %>
+        <div class="programmes-carte"
+             data-completed="<%= todo.completed %>">
+          <div class="programmes-carte-header"
+               style="background-image: url('<%= image_path("backgroundHome.png") %>');
+                      background-size: cover;">
+            <%= todo.completed ?
+                  "Jour #{todo.to_ordered_day}" :
+                  "Jour #{todo.to_ordered_day} : #{todo.title}" %>
+          </div>
+
+          <div class="programmes-carte-body">
+            <p><%= todo.completed ? todo.title : todo.description %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="programmes-main-card programmes-main-card--loading">
+    <div class="loadiv">
+      <div class="loader"></div>
+      <p>Creation du plan d'action en cours ...</p>
+    </div>
+<% end %>
+
+<% if objective.todos.order(:due_date).find_by(completed: false).present? %>
+  <%= link_to "COMMENCER",
+              todo_path(objective.todos.order(:due_date).find_by(completed: false)),
+              class: "bouton fokus-btn",
+              id: "fokus-btn" %>
+<% end %>
