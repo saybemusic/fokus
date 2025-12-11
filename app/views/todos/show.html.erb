@@ -33,7 +33,7 @@
         <div id="<%= dom_id(@todo, "next_todo") %>">
           <p>Bravo, vous avez atteint votre objectif !</p>
         </div>
-          <%= link_to "VOIR MES OBJECTIFS", objectives_path(@objective), class: "bouton fokus-btn" %>
+          <%= link_to "MES OBJECTIFS", objectives_path(@objective), class: "bouton fokus-btn" %>
       <% else %>
         <% if @todo_just_completed %>
           <%= link_to "JOUR SUIVANT", next_day_path(@todo), class: "bouton fokus-btn", id: dom_id(@todo, "next_todo") %>
