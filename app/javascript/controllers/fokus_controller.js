@@ -33,6 +33,7 @@ export default class extends Controller {
 
     this.resetTimer()
     this.updateButtons()
+    this.start()
   }
 
   start() {
