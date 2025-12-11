@@ -13,7 +13,7 @@
 
 <% if !@objective_completed && @task.todo.completed? %>
   <%= turbo_stream.replace(dom_id(@task.todo, "next_todo")) do %>
-    <%= link_to "Passer au jour suivant", next_day_path(@task.todo), class: "bouton fokus-btn", id: dom_id(@task.todo, "next_todo") %>
+    <%= link_to "JOUR SUIVANT", next_day_path(@task.todo), class: "bouton fokus-btn", id: dom_id(@task.todo, "next_todo") %>
   <% end %>
 <% end %>
 

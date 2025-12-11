@@ -13,13 +13,13 @@ class ObjectivesController < ApplicationController
   - Optionnal notes : resume
 
   Constraints:
-  1. Take the user’s constraints into account.
+  1. Take the input user’s constraints into account and strictly respect it.
   2. Each todo represents one day of the program.
   3. Each task is a concrete action for adult to be completed on that day.
   4. Respect the daily maximum time constraint.
   5. The program must be progressive and pedagogical.
   6. Provide clear titles and descriptions for each todo.
-  7. Each task should include a clear and actionable tip in ressource_ia to help the user start effectively (never give a link).
+  7. Each task should include a clear and actionable tip in ressource_ia to help the user start effectively (never give link for that).
   8. Assign a "priority" (integer) to each task to define execution order.
   9. The JSON output must be strictly valid (double quotes, no trailing commas).
   10. There should be minimum four task per todos but you can more task per todos if it's necessary.
