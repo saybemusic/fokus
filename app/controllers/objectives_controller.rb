@@ -74,7 +74,6 @@ class ObjectivesController < ApplicationController
     # @objective.goal = params[:goal]
     # @objective.time_due = params[:time_due]
     # @objective.time_global = params[:time_global]
-
     if @objective.save
       program_data = generate_program_llm(
         goal: @objective.goal,
@@ -82,6 +81,12 @@ class ObjectivesController < ApplicationController
         time_due: @objective.time_due
         )
         create_todos_and_tasks(@objective, program_data)
+
+        if @objective.todos.count < 1
+          @objective.destroy
+          redirect_to new_objective_path, alert: "Erreur lors de la génération du programme."
+          return
+        end
         @todos = Todo.all
         redirect_to @objective, notice: "Objectif créé et programme généré avec succès."
       else
