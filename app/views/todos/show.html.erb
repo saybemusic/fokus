@@ -16,37 +16,33 @@
           <%= render partial: "tasks/uncomplete_card", locals: { task: task } %>
         <% end %>
       <% end %>
-    <% @todo.tasks.each do |task| %>
-      <% if task.priority == 1 && !task.completed %>
-        <a href="#" class="bouton w-100 my-2 fokus-btn"
-          data-bs-toggle="modal"
-          data-bs-target="#fokusModal"
-          data-task-name="<%= task.title %>"
-          id="fokus-btn">
-          FOKUS
-        </a>
+      <% @todo.tasks.each do |task| %>
+        <% if task.priority == 1 && !task.completed %>
+          <a href="#" class="bouton w-100 my-2 fokus-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#fokusModal"
+            data-task-name="<%= task.title %>"
+            id="fokus-btn">
+            FOKUS
+          </a>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <div class="dbtn">
-    <% if @objective_completed %>
-      <div id="<%= dom_id(@todo, "next_todo") %>">
-        <p>Bravo, vous avez atteint votre objectif !</p>
-      </div>
-        <%= link_to "VOIR MES OBJECTIFS", objectives_path(@objective), class: "bouton fokus-btn" %>
-    <% else %>
-      <% if @todo_just_completed %>
-        <%= link_to "Passer au jour suivant", next_day_path(@todo), class: "bouton fokus-btn", id: dom_id(@todo, "next_todo") %>
-      <% else %>
-        <div id="<%= dom_id(@todo, "next_todo") %>"></div>
-      <% end %>
-    <% end %>
-  </div>
     </div>
-
-
-
-
+    <div class="dbtn">
+      <% if @objective_completed %>
+        <div id="<%= dom_id(@todo, "next_todo") %>">
+          <p>Bravo, vous avez atteint votre objectif !</p>
+        </div>
+          <%= link_to "VOIR MES OBJECTIFS", objectives_path(@objective), class: "bouton fokus-btn" %>
+      <% else %>
+        <% if @todo_just_completed %>
+          <%= link_to "JOUR SUIVANT", next_day_path(@todo), class: "bouton fokus-btn", id: dom_id(@todo, "next_todo") %>
+        <% else %>
+          <div id="<%= dom_id(@todo, "next_todo") %>"></div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <div class="modal fade"
@@ -111,7 +107,7 @@
                   class="bouton"
                   data-fokus-target="stopButton"
                   data-action="click->fokus#stop">
-            Stop
+            Reset
           </a>
         </div>
       </div>
