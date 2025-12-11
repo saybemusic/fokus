@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   # root "posts#index"
   devise_for :users
 
+  authenticate :user, ->(user) { user.admin? } do
+    mount MissionControl::Jobs::Engine, at: "/jobs"
+  end
+
   root to: "pages#home"
 
   resources :objectives
