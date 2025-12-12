@@ -30,6 +30,7 @@
 <% if objective.todos.order(:due_date).find_by(completed: false).present? %>
   <%= link_to "COMMENCER",
               todo_path(objective.todos.order(:due_date).find_by(completed: false)),
+              data: { turbo_frame: "_top" },
               class: "bouton fokus-btn",
               id: "fokus-btn" %>
 <% end %>
